@@ -164,9 +164,9 @@
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
-                                                        <label for="namaRekening">Nama Rekening</label>
+                                                        <label for="namaRekening">Nama Bank</label>
                                                         <div class="controls">
-                                                            <input type="text" id="namaRekening" class="form-control" name="namaRekening" placeholder="Nama Rekening" value="{{ $surat->nama_rekening }}">
+                                                            <input type="text" id="namaRekening" class="form-control" name="namaRekening" placeholder="Nama Bank" value="{{ $surat->nama_rekening }}">
                                                         </div>
                                                     </div>
                                                 </div>

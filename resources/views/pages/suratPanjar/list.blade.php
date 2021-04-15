@@ -44,7 +44,7 @@
                                                     <th class="text-center">No. Telp</th>
                                                     <th class="text-center">Sebagai</th>
                                                     {{-- <th class="text-center">No. Rekening</th>
-                                                    <th class="text-center">Nama Rekening</th>
+                                                    <th class="text-center">Nama Bank</th>
                                                     <th class="text-center">Cabang</th> --}}
                                                     {{-- <th class="text-center">Created</th>
                                                     <th class="text-center">Updated</th> --}}

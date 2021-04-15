@@ -88,7 +88,7 @@
                                                     <td>: {{ $surat->no_rekening }}</td>
                                                 </tr>
                                                 <tr style="height: 25px">
-                                                    <td >Nama Rekening</td>
+                                                    <td >Nama Bank</td>
                                                     <td style="width: 100px"></td>
                                                     <td>: {{ $surat->nama_rekening }}</td>
                                                 </tr>
