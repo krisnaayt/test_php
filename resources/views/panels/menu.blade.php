@@ -16,6 +16,7 @@
             <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
                 @if ($userInfo->user_group == 'admin_surat')
                 <li class="{{ Request::segment(1) == 'suratPanjar' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/suratPanjar') }}" ><i class="feather icon-file"></i><span >Surat</span></a></li>
+                <li class="{{ Request::segment(1) == 'suratReport' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/suratReport') }}" ><i class="feather icon-file"></i><span >Report</span></a></li>
                 @elseif($userInfo->user_group == 'admin_emus')
                 <li class="{{ Request::segment(1) == 'suratPanjar' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/') }}" ><i class="feather icon-file"></i><span >Emus</span></a></li>
                 @endif

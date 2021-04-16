@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/','AuthController@login');
 
 Route::prefix('auth')->group(function(){
     Route::get('/','AuthController@login');
@@ -30,6 +31,10 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::get('/delete/{id}', 'SuratPanjarController@delete');
             Route::get('/preview/{preview}', 'SuratPanjarController@preview');
             Route::get('/test', 'SuratPanjarController@test');
+        });
+        Route::prefix('suratReport')->group(function(){
+            Route::get('/', 'SuratReportController@index');
+            Route::get('/export', 'SuratReportController@export');
         });
     });
 });

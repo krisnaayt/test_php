@@ -20,7 +20,7 @@ class PermissionMiddleware
 
         $segment1 = request()->segment(1);
 
-        if($userGroup == 'admin_surat' and $segment1 == 'suratPanjar'){
+        if($userGroup == 'admin_surat' and ($segment1 == 'suratPanjar' or $segment1 == 'suratReport')){
             return $next($request);
         }elseif($userGroup == 'admin_emus' and $segment1 == 'emus'){
             return $next($request);

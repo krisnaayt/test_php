@@ -11,6 +11,7 @@
 <script src="{{ asset('vendors/js/moment/moment.js') }}"></script>
 <script src="{{ asset('vendors/js/moment/moment-with-locales.js') }}"></script>
 <script src="{{ asset('vendors/js/pickers/datetime/bootstrap-datetimepicker.min.js') }}"></script>
+<script src="{{ asset('vendors/js/pickers/daterange/daterangepicker.js') }}"></script>
 {{-- select2 --}}
 <script src="{{ asset('vendors/js/forms/select/select2.full.min.js') }}"></script>
 {{-- Datatable --}}
