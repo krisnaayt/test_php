@@ -19,6 +19,7 @@ mix
     .js('resources/js/pages/suratPanjar/edit.js', 'public/js/pages/suratPanjar')
     .js('resources/js/pages/suratPanjar/preview.js', 'public/js/pages/suratPanjar')
     .js('resources/js/auth/login.js', 'public/js/auth')
+    .js('resources/js/pages/suratReport/export.js', 'public/js/pages/suratReport')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/globalCustom.scss', 'public/css')
     .sass('resources/sass/pages/suratPanjar/preview.scss', 'public/css/pages/suratPanjar')

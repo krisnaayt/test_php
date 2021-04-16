@@ -7,5 +7,6 @@
     "/js/pages/suratPanjar/add.js": "/js/pages/suratPanjar/add.js",
     "/js/pages/suratPanjar/edit.js": "/js/pages/suratPanjar/edit.js",
     "/js/pages/suratPanjar/list.js": "/js/pages/suratPanjar/list.js",
-    "/js/pages/suratPanjar/preview.js": "/js/pages/suratPanjar/preview.js"
+    "/js/pages/suratPanjar/preview.js": "/js/pages/suratPanjar/preview.js",
+    "/js/pages/suratReport/export.js": "/js/pages/suratReport/export.js"
 }
