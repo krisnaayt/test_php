@@ -24,7 +24,7 @@
                 </div>
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                            <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{ $userInfo->fullname }}</span></div><span><i class="fa fa-user-circle fa-2x"></i></span>
+                            <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{ $userInfo->nama }}</span></div><span><i class="fa fa-user-circle fa-2x"></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{ URL::to('doLogout') }}"><i class="feather icon-power"></i> Logout</a>

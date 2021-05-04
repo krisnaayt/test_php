@@ -15,12 +15,14 @@ class CreateTbUserTable extends Migration
     {
         DB::statement('
             create table tb_user(
-                id_user int auto_increment,
+                id_user int,
                 username varchar(256) not null,
-                fullname varchar(256) not null,
                 email varchar(256) not null,
                 password varchar(256) not null,
                 user_group varchar(256) not null,
+                nama varchar(256) not null,
+                nip varchar(256) null,
+                jabatan varchar(256) null,
 
                 constraint pk_tb_user_user_id primary key(id_user),
                 constraint uq_tb_user_username unique(username)

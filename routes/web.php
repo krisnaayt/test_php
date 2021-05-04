@@ -11,6 +11,7 @@
 |
 */
 Route::get('/','AuthController@login');
+Route::get('/test', 'SuratPanjarController@test');
 
 Route::prefix('auth')->group(function(){
     Route::get('/','AuthController@login');
@@ -29,12 +30,23 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::get('/edit/{id}', 'SuratPanjarController@edit');
             Route::post('/update', 'SuratPanjarController@update');
             Route::get('/delete/{id}', 'SuratPanjarController@delete');
-            Route::get('/preview/{preview}', 'SuratPanjarController@preview');
-            Route::get('/test', 'SuratPanjarController@test');
+            Route::get('/preview/{preview}', 'SuratPanjarController@preview');           
         });
         Route::prefix('suratReport')->group(function(){
             Route::get('/', 'SuratReportController@index');
             Route::get('/export', 'SuratReportController@export');
+        });
+
+        Route::prefix('berkasPerkara')->group(function(){
+            Route::get('/', 'BerkasPerkaraController@index');
+            Route::get('/get', 'BerkasPerkaraController@get');
+            Route::get('/add', 'BerkasPerkaraController@add');
+            Route::post('/store', 'BerkasPerkaraController@store');
+            Route::get('/getJenisPerkara', 'BerkasPerkaraController@getJenisPerkara');
+            Route::get('/detail/{id}', 'BerkasPerkaraController@detail');
+            Route::get('/edit/{id}', 'BerkasPerkaraController@edit');
+            Route::post('/getBerkasPerkara', 'BerkasPerkaraController@getBerkasPerkara');
+
         });
     });
 });

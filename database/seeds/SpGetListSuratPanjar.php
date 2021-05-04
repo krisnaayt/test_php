@@ -21,7 +21,7 @@ class SpGetListSuratPanjar extends Seeder
             id_surat,
             concat(lpad(no_surat, 4, '0'), '/', 'SP-PSP', '/', bulan_surat, '/', tahun_surat, '/', 'PA.Blcn') as no_surat_full,
             concat(no_perkara, '/', 'Pdt.', info_perkara, '/', tahun_perkara, '/', 'PA.Blcn') as no_perkara_full,
-            nama,
+            sp.nama,
             alamat,
             no_telp,
             sebagai,

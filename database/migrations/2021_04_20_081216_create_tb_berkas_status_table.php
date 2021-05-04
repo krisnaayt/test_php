@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddConstraintUniqueOnTbSuratPanjarTable extends Migration
+class CreateTbBerkasStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class AddConstraintUniqueOnTbSuratPanjarTable extends Migration
      */
     public function up()
     {
-        DB::statement('
-            ALTER TABLE tb_surat_panjar ADD CONSTRAINT uq_tb_surat_panjar_no_surat UNIQUE (no_surat);
-        ');
+        DB::statement("
+            create table tb_berkas_status(
+                id_berkas_status int,
+                berkas_status varchar(256),
+
+                constraint pk_tb_berkas_status primary key (id_berkas_status)
+            )
+        ");
     }
 
     /**
@@ -25,8 +30,6 @@ class AddConstraintUniqueOnTbSuratPanjarTable extends Migration
      */
     public function down()
     {
-        DB::statement('
-            ALTER TABLE tb_surat_panjar DROP INDEX uq_tb_surat_panjar_no_surat;
-        ');
+        Schema::dropIfExists('berkas_status');
     }
 }

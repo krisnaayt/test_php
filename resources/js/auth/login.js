@@ -25,7 +25,8 @@ $(function(){
             })
                 .done(function(res) {
                     enableSubmitButton()
-                    location.href = window.location.origin + '/suratPanjar'
+                    location.href = window.location.origin + res.data.homeLink
+                    
                 })
                 .fail(function(res) {
                     enableSubmitButton()
