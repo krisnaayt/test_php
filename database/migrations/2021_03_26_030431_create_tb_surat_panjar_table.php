@@ -35,7 +35,7 @@ class CreateTbSuratPanjarTable extends Migration
                 updated_at datetime,
 
                 constraint pk_tb_surat_panjar_id_surat primary key(id_surat),
-
+                constraint uq_tb_surat_panjar_no_surat unique (no_surat),
                 constraint fk_tb_surat_panjar_created_by foreign key(created_by) references tb_user(id_user) on update cascade on delete restrict,
                 constraint fk_tb_surat_panjar_updated_by foreign key(updated_by) references tb_user(id_user) on update cascade on delete restrict
 

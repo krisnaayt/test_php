@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -116,7 +116,7 @@ $(function () {
         data: data
       }).done(function (res) {
         enableSubmitButton();
-        location.href = window.location.origin + '/suratPanjar';
+        location.href = window.location.origin + res.data.homeLink;
       }).fail(function (res) {
         enableSubmitButton();
 
@@ -132,7 +132,7 @@ $(function () {
 
 /***/ }),
 
-/***/ 5:
+/***/ 1:
 /*!******************************************!*\
   !*** multi ./resources/js/auth/login.js ***!
   \******************************************/

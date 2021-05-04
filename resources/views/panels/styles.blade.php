@@ -8,6 +8,7 @@
 {{-- bootstap datetime picker --}}
 <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/pickers/datetime/bootstrap-datetimepicker.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/pickers/daterange/daterangepicker.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/pickers/date/bootstrap-datepicker.min.css') }}">
 {{-- select2 --}}
 <link rel="stylesheet" href="{{ asset('vendors/css/forms/select/select2.min.css') }}">
 {{-- Datatable --}}

@@ -17,7 +17,13 @@ class AuthController extends Controller
         $user = Auth::attempt(['username' => $request->username, 'password' => $request->password]);
         
         if($user){
-            return response()->json(['status' => true, 'message' => '', 'data' => []], 200);
+            
+            $userGroup = Auth::user()->user_group; 
+
+            $homeLink = $userGroup == 'admin' || $userGroup == 'admin_surat' ? '/suratPanjar' : ($userGroup == 'admin_emus' ? '/berkasPerkara': '');
+
+            return response()->json(['status' => true, 'message' => '', 'data' => ['homeLink'=>$homeLink]], 200);
+
         }else{
             return response()->json(['status' => false, 'message' => 'Login gagal. Periksa kembali username dan passowrd Anda atau hubungi Developer.', 'data' => []], 400);
         }

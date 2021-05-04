@@ -282,7 +282,13 @@ $.ajaxSetup({
     $(this).valid()
   });
   
-  // ----- 
+  // ----- bootstrapDatepicker
+
+  $(".bootstrapDatepicker").datepicker({
+    format: 'dd/mm/yyyy',
+    autoclose: true,
+    todayHighlight: true,
+  });
   
   // ----- datetimepicker
   

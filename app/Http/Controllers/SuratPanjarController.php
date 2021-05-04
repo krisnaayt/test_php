@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Surat_panjar;
+use App\Berkas_perkara;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\URL;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 // class CustomExeption extends Exception
 // { }
@@ -28,7 +30,7 @@ class SuratPanjarController extends Controller
                 $actions = '<div class="text-center">';
                 $actions .= '<a title="Detail" class="btn btn-icon btn-xs btn-info" role="button" href="' . URL::to('suratPanjar/preview/' . encrypt($row->id_surat)) . '"><i class="fa fa-search"></i></a> ';
                 $actions .= '<a title="Edit" class="btn btn-icon btn-xs btn-warning" role="button" href="' . URL::to('suratPanjar/edit/' . encrypt($row->id_surat)) . '"><i class="fa fa-pencil-square-o"></i></a> ';
-                $actions .= '<button title="Delete" class="btn btn-icon btn-xs btn-danger" role="button" id="deleteSuratBtn" data-id="' . encrypt($row->id_surat) . '"><i class="fa fa-trash-o"></i></button> ';
+                $actions .= '<button type="button" title="Delete" class="btn btn-icon btn-xs btn-danger" role="button" id="deleteSuratBtn" data-id="' . encrypt($row->id_surat) . '"><i class="fa fa-trash-o"></i></button> ';
                 $actions .= '</div>';
                 return $actions;
             })
@@ -62,9 +64,18 @@ class SuratPanjarController extends Controller
 
     public function test()
     {
-        $userInfo = Auth::user();
+        // $pass = Hash::make('p3rk4r4');
 
-        dd($userInfo);
+        // echo $pass;
+        $lastBerkas = Berkas_perkara::where(DB::raw("date_format(created_at, '%Y-%m')"), date('Y-m'))
+        ->orderBy('id_berkas', 'desc')->first();
+
+        $orderNo = $lastBerkas ? ((int) substr($lastBerkas->kode_berkas, 6) + 1) : 1;
+
+        $kodeBerkas = 'BP' . date('ym') . str_pad($orderNo, 5, 0, STR_PAD_LEFT);
+
+        echo $kodeBerkas;
+
         
     }
 

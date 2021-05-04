@@ -3,7 +3,7 @@
     <div class="navbar-header d-xl-block d-none">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item">
-                <a class="navbar-brand" href="{{ $userInfo->user_group == 'admin_surat' ? URL::to('suratPanjar') : '' }}">
+                <a class="navbar-brand" href="{{ $userInfo->user_group == 'admin_surat' ? URL::to('suratPanjar') : ($userInfo->user_group == 'admin_emus' ? URL::to('berkasPerkara') : '') }}">
                     <img class="font-weight-bold" src="{{ asset('images/logo_pa_batulicin.png') }}" style="max-width: 9%; max-height: 9%">
                     &nbsp;<strong>PA Batulicin</strong>
                 </a>
@@ -44,7 +44,7 @@
                     </li>
                     @endif
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                            <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{ $userInfo->fullname }}</span></div><span><i class="fa fa-user-circle fa-2x"></i></span>
+                            <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">{{ $userInfo->nama }}</span></div><span><i class="fa fa-user-circle fa-2x"></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="{{ URL::to('doLogout') }}"><i class="feather icon-power"></i> Logout</a>
