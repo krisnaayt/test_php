@@ -22,7 +22,9 @@ class SpGetListBerkasPerkara extends Seeder
             bp.kode_berkas,
             date_format(bp.tgl_penyerahan, '%d/%m/%Y') as tgl_penyerahan,
 			group_concat(p.no_perkara separator ', ') as no_perkara,
+            bp.id_berkas_status,
             bs.berkas_status,
+            bs.badge,
             concat(u_cr.nama, ' pada ', date_format(bp.created_at, '%d/%m/%Y %H:%i')) as created,
             concat(u_up.nama, ' pada ', date_format(bp.updated_at, '%d/%m/%Y %H:%i')) as updated,
             concat(u_ap.nama, ' pada ', date_format(bp.approved_at, '%d/%m/%Y %H:%i')) as approved,
@@ -35,7 +37,7 @@ class SpGetListBerkasPerkara extends Seeder
             left join tb_user u_up on bp.updated_by = u_up.id_user 
             left join tb_user u_ap on bp.approved_by = u_ap.id_user 
             left join tb_user u_re on bp.rejected_by = u_re.id_user
-			group by bp.id_berkas, bp.kode_berkas, bp.tgl_penyerahan, bs.berkas_status,
+			group by bp.id_berkas, bp.kode_berkas, bp.tgl_penyerahan, bp.id_berkas_status, bs.berkas_status, bs.badge,
             u_cr.nama, u_up.nama, u_ap.nama, u_re.nama,
             created, updated, approved, rejected
             order by bp.id_berkas desc

@@ -1,10 +1,10 @@
 @extends('layouts.contentLayoutMaster')
 
-@section('title', 'Edit Berkas')
+@section('title', 'Set BHT')
 
 @section('subtitle', 'Penyerahan Berkas yang Telah Diminutasi oleh Panitera Pengganti')
 
-@section('breadcrumb', 'Edit')
+@section('breadcrumb', 'Set BHT')
 
 @section('vendor-style')
 @endsection
@@ -24,9 +24,9 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form form-vertical" id="editBerkasPerkaraForm">
+                            <form class="form form-vertical" id="setBhtForm">
                                 @csrf
-                                <input type="hidden" id="idBerkas" name="idBerkas" value="{{ $id }}">
+                                <input type="hidden" id="idBerkas" name="idBerkas" value="{{ encrypt($berkas->id_berkas) }}">
                                 <div class="form-body">
                                     <div class="row">
                                         <div class="col-sm-3">
@@ -38,23 +38,23 @@
                                             <div class="form-group">
                                                 <label for="kodeBerkas">Kode Berkas</label>
                                                 <div class="controls">
-                                                    <input readonly type="text" id="kodeBerkas" class="form-control" name="kodeBerkas" placeholder="Kode Berkas">
+                                                    <input readonly type="text" id="kodeBerkas" class="form-control" name="kodeBerkas" placeholder="Kode Berkas" value="{{ $berkas->kode_berkas }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label for="tglPenyerahan">Tgl. Penyerahan</label>
                                                 <div class="controls">
-                                                    <input type="text" id="tglPenyerahan" class="form-control bootstrapDatepicker" name="tglPenyerahan" placeholder="Tgl Penyerahan">
+                                                    <input readonly type="text" id="tglPenyerahan" class="form-control bootstrapDatepicker" name="tglPenyerahan" placeholder="Tgl Penyerahan" value="{{ $berkas->tgl_penyerahan }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <div class="col-sm-3">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label for="status">Status Terakhir</label>
                                                 <div class="controls">
-                                                    <div class=""></div>
+                                                    <div class="{{ $berkas->berkasStatus->badge }}">{{ $berkas->berkasStatus->berkas_status }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,17 +62,17 @@
                                             <div class="form-group">
                                                 <label for="createdBy">Dibuat</label>
                                                 <div class="controls">
-                                                    <input readonly type="text" id="created" class="form-control" name="created">
+                                                    <input readonly type="text" id="created" class="form-control" name="created" value="{{ $berkas->created}}">
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </div>
-                                    {{-- <div class="row">
+                                    <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label for="updatedBy">Di-update</label>
                                                 <div class="controls">
-                                                    <input readonly type="text" id="updated" class="form-control" name="updated">
+                                                    <input readonly type="text" id="updated" class="form-control" name="updated" value="{{ $berkas->updated}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
                                             <div class="form-group">
                                                 <label for="approvedBy">Diterima</label>
                                                 <div class="controls">
-                                                    <input readonly type="text" id="approved" class="form-control" name="approved">
+                                                    <input readonly type="text" id="approved" class="form-control" name="approved" value="{{ $berkas->approved}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +88,7 @@
                                             <div class="form-group">
                                                 <label for="rejectedBy">Ditolak</label>
                                                 <div class="controls">
-                                                    <input readonly type="text" id="rejected" class="form-control" name="rejected">
+                                                    <input readonly type="text" id="rejected" class="form-control" name="rejected" value="{{ $berkas->rejected}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -96,11 +96,11 @@
                                             <div class="form-group">
                                                 <label for="ketStatus">Keterangan</label>
                                                 <div class="controls">
-                                                    <textarea readonly class="form-control" id="ketStatus" rows="3" placeholder="Keterangan"></textarea>
+                                                    <textarea readonly class="form-control" id="ketStatusDetail" name="ketStatusDetail"  rows="3" placeholder="Keterangan">{{ $berkas->ket_status }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm">
@@ -110,7 +110,7 @@
                                     <div class="row">
                                         <div class="col-sm">
                                             <div class="table-responsive">
-                                                <table class="table table-bordered" id="perkaraTable">
+                                                <table class="table table-bordered" id="perkaraTable" style="width: 100%">
                                                     <thead>
                                                         <tr>
                                                             <th>No.</th>
@@ -119,12 +119,23 @@
                                                             <th>Tgl. Putus</th>
                                                             <th>Tgl. Minutasi</th>
                                                             <th>Tgl. BHT</th>
-                                                            <th>
-                                                                <button type="button" title="Add" class="btn btn-icon btn-xs btn-success" role="button" id="addPerkaraBtn" ><i class="fa fa-plus"></i></button>
-                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="perkaraTbody">
+                                                        @foreach ($berkas->perkara as $perkara)
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>{{ $perkara->no_perkara }}</td>
+                                                                <td>{{ $perkara->jenisPerkara->kode_jenis_perkara.' - '.$perkara->jenisPerkara->jenis_perkara }}</td>
+                                                                <td>{{ $perkara->tgl_putus }}</td>
+                                                                <td>{{ $perkara->tgl_minutasi }}</td>
+                                                                <td>
+                                                                    <div class="controls">
+                                                                        <input type="text" class="form-control bootstrapDatepicker tglBht" name="tglBht[{{ $perkara->id_perkara }}]" placeholder="Tgl BHT" value="{{ $perkara->tgl_bht }}">
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -152,5 +163,5 @@
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('js/pages/berkasPerkara/edit.js') }}"></script>
+    <script src="{{ asset('js/pages/berkasPerkara/bht.js') }}"></script>
 @endsection

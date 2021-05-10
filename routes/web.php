@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Http\Controllers\BerkasPerkaraController;
+
 Route::get('/','AuthController@login');
 Route::get('/test', 'SuratPanjarController@test');
 
@@ -46,6 +49,11 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::get('/detail/{id}', 'BerkasPerkaraController@detail');
             Route::get('/edit/{id}', 'BerkasPerkaraController@edit');
             Route::post('/getBerkasPerkara', 'BerkasPerkaraController@getBerkasPerkara');
+            Route::post('/update', 'BerkasPerkaraController@update');
+            Route::get('/review/{id}', 'BerkasPerkaraController@review');
+            Route::post('/storeReview', 'BerkasPerkaraController@storeReview');
+            Route::get('/setBht/{id}', 'BerkasPerkaraController@setBht');
+            Route::post('/storeSetBht', 'BerkasPerkaraController@storeSetBht');
 
         });
     });

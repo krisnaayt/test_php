@@ -22,9 +22,10 @@ class SeederBerkasStatus extends Seeder
                 badge
             )
             values
-            ('0', 'Waiting', 'badge badge-info'),
-            ('1', 'Approve', 'badge badge-success'),
-            ('2', 'Reject', 'badge badge-danger')
+            ('1', 'Menunggu', 'badge badge-info'),
+            ('2', 'Diterima', 'badge badge-success'),
+            ('3', 'Ditolak', 'badge badge-danger'),
+            ('4', 'BHT', 'badge badge-primary')
             ;
         ");
     }

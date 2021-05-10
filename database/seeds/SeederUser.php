@@ -11,9 +11,9 @@ class SeederUser extends Seeder
      */
     public function run()
     {
-        DB::statement("
-            delete from tb_user;
-        ");
+        // DB::statement("
+        //     delete from tb_user;
+        // ");
 
         DB::statement("
             insert ignore into tb_user(

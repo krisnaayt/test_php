@@ -18,12 +18,12 @@ $(function() {
                     <td class="rowNo">${perkaraRowNo}</td>
                     <td>
                         <div class="controls">
-                            <input type="text" id="noPerkara${perkaraRowId}" class="form-control noPerkara" name="noPerkara[]" placeholder="No. Perkara">
+                            <input type="text" id="noPerkara${perkaraRowId}" class="form-control noPerkara" name="noPerkara[${perkaraRowId}]" placeholder="No. Perkara">
                         </div>
                     </td>
                     <td>
                         <div class="controls">
-                            <select class="form-control select2 idJenisPerkara" id="idJenisPerkara${perkaraRowId}" name="idJenisPerkara[]">
+                            <select class="form-control select2 idJenisPerkara" id="idJenisPerkara${perkaraRowId}" name="idJenisPerkara[${perkaraRowId}]">
                                 <option></option>
                                 `;
 
@@ -39,21 +39,21 @@ $(function() {
                     </td>
                     <td>
                         <div class="controls">
-                            <input type="text" id="tglPutus${perkaraRowId}" class="form-control bootstrapDatepicker tglPutus" name="tglPutus[]" placeholder="Tgl Putus">
+                            <input type="text" id="tglPutus${perkaraRowId}" class="form-control bootstrapDatepicker tglPutus" name="tglPutus[${perkaraRowId}]" placeholder="Tgl Putus">
                         </div>
                     </td>
                     <td>
                         <div class="controls">
-                            <input type="text" id="tglMinutasi${perkaraRowId}" class="form-control bootstrapDatepicker tglMinutasi" name="tglMinutasi[]" placeholder="Tgl Minutasi">
+                            <input type="text" id="tglMinutasi${perkaraRowId}" class="form-control bootstrapDatepicker tglMinutasi" name="tglMinutasi[${perkaraRowId}]" placeholder="Tgl Minutasi">
                         </div>
                     </td>
                     <td>
                         <div class="controls">
-                            <input type="text" id="tglBht${perkaraRowId}" class="form-control bootstrapDatepicker tglBht" name="tglBht[]" placeholder="Tgl BHT">
+                            <input type="text" id="tglBht${perkaraRowId}" class="form-control bootstrapDatepicker tglBht" name="tglBht[${perkaraRowId}]" placeholder="Tgl BHT">
                         </div>
                     </td>
                     <td>
-                        <button type="button" title="Add" class="btn btn-icon btn-xs btn-danger removePerkaraBtn" role="button" id="removePerkaraBtn${perkaraRowId}" ><i class="fa fa-minus"></i></button>
+                        <button type="button" title="Delete" class="btn btn-icon btn-xs btn-danger removePerkaraBtn" role="button" id="removePerkaraBtn${perkaraRowId}" ><i class="fa fa-minus"></i></button>
                     </td>
                 </tr>
             `;
@@ -146,7 +146,8 @@ $(function() {
             error.appendTo(element.closest(".controls"));
         },
         submitHandler: function(form) {
-            disableSubmitButton();
+            var btnContent = getFormButton('.formBtn')
+            disableFormButton(btnContent);
             var data = $(form).serialize();
 
             $.ajax({
@@ -155,12 +156,11 @@ $(function() {
                 data: data
             })
                 .done(function(res) {
-                    enableSubmitButton()
-                    console.log(res)
-                    // swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
+                    enableFormButton(btnContent)
+                    swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
                 })
                 .fail(function(res) {
-                    enableSubmitButton()
+                    enableFormButton(btnContent)
                     swal('error', 'Server Error', 'Data gagal disimpan')
                 });
         }

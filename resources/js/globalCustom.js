@@ -358,4 +358,35 @@ $.ajaxSetup({
   $('.modal').on('hidden.bs.modal', function () {
     $(this).find('.form')[0].reset()
   });
+
+  // ----- back button
+  $('.backBtn').on('click', function(){
+    location.href = window.location.origin + $(this).data('url')
+  })
+
+  // ------ get button element and text by class
+
+  function getFormButton(elementClass){
+    var btnContent = [];
+    $(elementClass).each(function(){
+      var item = {}
+      item['id'] = $(this).attr('id');
+      item['text'] = $(this).text();
+
+      btnContent.push(item);
+    })
+    return btnContent 
+  }
+
+  function disableFormButton(btnContent){
+    btnContent.map(function(item){
+      disableButton('#'+item.id)
+    })
+  }
+
+  function enableFormButton(btnContent){
+    btnContent.map(function(item){
+      enableButton('#'+item.id, item.text)
+    })  
+  }
   

@@ -13,23 +13,23 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function convertToViewDate($date){
-        $dateFormat = DateTime::createFromFormat('Y-m-d', $date);
-        return $dateFormat->format('d/m/Y');
+        $dateFormat = $date ? DateTime::createFromFormat('Y-m-d', $date) : '';
+        return $dateFormat ? $dateFormat->format('d/m/Y') : '';
     }
 
     public function convertToDBDate($date){
-        $dateFormat = DateTime::createFromFormat('d/m/Y', $date);
-        return $dateFormat->format('Y-m-d'); 
+        $dateFormat = $date ? DateTime::createFromFormat('d/m/Y', $date) : '';
+        return $dateFormat ? $dateFormat->format('Y-m-d') : ''; 
     }
 
 
     public function convertToViewDateTime($date){
-        $dateFormat = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-        return $dateFormat->format('d/m/Y H:i');
+        $dateFormat = $date ? DateTime::createFromFormat('Y-m-d H:i:s', $date) : '';
+        return $dateFormat ? $dateFormat->format('d/m/Y H:i') : ''; 
     }
 
     public function convertToDBDateTime($date){
-        $dateFormat = DateTime::createFromFormat('d/m/Y H:i', $date);
-        return $dateFormat->format('Y-m-d H:i:s'); 
+        $dateFormat = $date ? DateTime::createFromFormat('d/m/Y H:i', $date) : '';
+        return $dateFormat ? $dateFormat->format('Y-m-d H:i:s') : ''; 
     }
 }

@@ -10,4 +10,9 @@ class Perkara extends Model
     protected $table = 'perkara';
     protected $primaryKey = 'id_perkara';
 
+    function jenisPerkara(){
+        return $this->hasOne('App\Jenis_perkara', 'id_jenis_perkara', 'id_jenis_perkara');
+    }
+
+
 }
