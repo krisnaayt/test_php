@@ -30,7 +30,7 @@ class SuratPanjarController extends Controller
                 $actions = '<div class="text-center">';
                 $actions .= '<a title="Detail" class="btn btn-icon btn-xs btn-info" role="button" href="' . URL::to('suratPanjar/preview/' . encrypt($row->id_surat)) . '"><i class="fa fa-search"></i></a> ';
                 $actions .= '<a title="Edit" class="btn btn-icon btn-xs btn-warning" role="button" href="' . URL::to('suratPanjar/edit/' . encrypt($row->id_surat)) . '"><i class="fa fa-pencil-square-o"></i></a> ';
-                $actions .= '<button type="button" title="Delete" class="btn btn-icon btn-xs btn-danger" role="button" id="deleteSuratBtn" data-id="' . encrypt($row->id_surat) . '"><i class="fa fa-trash-o"></i></button> ';
+                // $actions .= '<button type="button" title="Delete" class="btn btn-icon btn-xs btn-danger" role="button" id="deleteSuratBtn" data-id="' . encrypt($row->id_surat) . '"><i class="fa fa-trash-o"></i></button> ';
                 $actions .= '</div>';
                 return $actions;
             })

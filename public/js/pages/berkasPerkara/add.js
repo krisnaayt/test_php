@@ -104,11 +104,11 @@ $(function () {
     }).done(function (res) {
       var jenisPerkara = res.data.jenisPerkara;
       perkaraContent = "";
-      perkaraContent += "\n                <tr class=\"perkaraRow\" id=\"perkaraRowId".concat(perkaraRowId, "\" data-id=\"").concat(perkaraRowId, "\">\n                    <td class=\"rowNo\">").concat(perkaraRowNo, "</td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"noPerkara").concat(perkaraRowId, "\" class=\"form-control noPerkara\" name=\"noPerkara[]\" placeholder=\"No. Perkara\">\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <select class=\"form-control select2 idJenisPerkara\" id=\"idJenisPerkara").concat(perkaraRowId, "\" name=\"idJenisPerkara[]\">\n                                <option></option>\n                                ");
+      perkaraContent += "\n                <tr class=\"perkaraRow\" id=\"perkaraRowId".concat(perkaraRowId, "\" data-id=\"").concat(perkaraRowId, "\">\n                    <td class=\"rowNo\">").concat(perkaraRowNo, "</td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"noPerkara").concat(perkaraRowId, "\" class=\"form-control noPerkara\" name=\"noPerkara[").concat(perkaraRowId, "]\" placeholder=\"No. Perkara\">\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <select class=\"form-control select2 idJenisPerkara\" id=\"idJenisPerkara").concat(perkaraRowId, "\" name=\"idJenisPerkara[").concat(perkaraRowId, "]\">\n                                <option></option>\n                                ");
       jenisPerkara.map(function (item) {
         perkaraContent += "\n                    <option value=\"".concat(item.id_jenis_perkara, "\">").concat(item.nama_jenis_perkara, "</option>\n                ");
       });
-      perkaraContent += "\n                            </select>\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"tglPutus".concat(perkaraRowId, "\" class=\"form-control bootstrapDatepicker tglPutus\" name=\"tglPutus[]\" placeholder=\"Tgl Putus\">\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"tglMinutasi").concat(perkaraRowId, "\" class=\"form-control bootstrapDatepicker tglMinutasi\" name=\"tglMinutasi[]\" placeholder=\"Tgl Minutasi\">\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"tglBht").concat(perkaraRowId, "\" class=\"form-control bootstrapDatepicker tglBht\" name=\"tglBht[]\" placeholder=\"Tgl BHT\">\n                        </div>\n                    </td>\n                    <td>\n                        <button type=\"button\" title=\"Add\" class=\"btn btn-icon btn-xs btn-danger removePerkaraBtn\" role=\"button\" id=\"removePerkaraBtn").concat(perkaraRowId, "\" ><i class=\"fa fa-minus\"></i></button>\n                    </td>\n                </tr>\n            ");
+      perkaraContent += "\n                            </select>\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"tglPutus".concat(perkaraRowId, "\" class=\"form-control bootstrapDatepicker tglPutus\" name=\"tglPutus[").concat(perkaraRowId, "]\" placeholder=\"Tgl Putus\">\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"tglMinutasi").concat(perkaraRowId, "\" class=\"form-control bootstrapDatepicker tglMinutasi\" name=\"tglMinutasi[").concat(perkaraRowId, "]\" placeholder=\"Tgl Minutasi\">\n                        </div>\n                    </td>\n                    <td>\n                        <div class=\"controls\">\n                            <input type=\"text\" id=\"tglBht").concat(perkaraRowId, "\" class=\"form-control bootstrapDatepicker tglBht\" name=\"tglBht[").concat(perkaraRowId, "]\" placeholder=\"Tgl BHT\">\n                        </div>\n                    </td>\n                    <td>\n                        <button type=\"button\" title=\"Delete\" class=\"btn btn-icon btn-xs btn-danger removePerkaraBtn\" role=\"button\" id=\"removePerkaraBtn").concat(perkaraRowId, "\" ><i class=\"fa fa-minus\"></i></button>\n                    </td>\n                </tr>\n            ");
       $('#perkaraTbody').append(perkaraContent);
       $(".select2").select2({
         dropdownAutoWidth: true,
@@ -185,17 +185,18 @@ $(function () {
       error.appendTo(element.closest(".controls"));
     },
     submitHandler: function submitHandler(form) {
-      disableSubmitButton();
+      var btnContent = getFormButton('.formBtn');
+      disableFormButton(btnContent);
       var data = $(form).serialize();
       $.ajax({
         type: "post",
         url: window.location.origin + "/berkasPerkara/store",
         data: data
       }).done(function (res) {
-        enableSubmitButton();
-        console.log(res); // swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
+        enableFormButton(btnContent);
+        swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara');
       }).fail(function (res) {
-        enableSubmitButton();
+        enableFormButton(btnContent);
         swal('error', 'Server Error', 'Data gagal disimpan');
       });
     }

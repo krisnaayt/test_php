@@ -29,7 +29,8 @@ class SpGetListSuratPanjar extends Seeder
             nama_rekening,
             cabang,
             concat(uc.username, ' at ', date_format(created_at, '%d-%m-%Y %H:%i')) as created,
-            concat(uu.username, ' at ', date_format(updated_at, '%d-%m-%Y %H:%i')) as updated
+            concat(uu.username, ' at ', date_format(updated_at, '%d-%m-%Y %H:%i')) as updated,
+            sp.created_at
             from tb_surat_panjar sp
             left join tb_user uc on sp.created_by = uc.id_user 
             left join tb_user uu on sp.updated_by = uu.id_user

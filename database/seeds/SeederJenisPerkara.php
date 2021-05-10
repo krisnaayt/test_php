@@ -11,9 +11,9 @@ class SeederJenisPerkara extends Seeder
      */
     public function run()
     {
-        DB::statement("
-            delete from tb_jenis_perkara;
-        ");
+        // DB::statement("
+        //     delete from tb_jenis_perkara;
+        // ");
 
         DB::statement("
             insert ignore into tb_jenis_perkara(

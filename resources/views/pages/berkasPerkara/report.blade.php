@@ -1,10 +1,10 @@
 @extends('layouts.contentLayoutMaster')
 
-@section('title', 'Add Berkas')
+@section('title', 'Report Perkara')
 
 @section('subtitle', 'Penyerahan Berkas yang Telah Diminutasi oleh Panitera Pengganti')
 
-@section('breadcrumb', 'Add')
+@section('breadcrumb', 'Report Perkara')
 
 @section('vendor-style')
 @endsection
@@ -129,5 +129,5 @@
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('js/pages/berkasPerkara/add.js') }}"></script>
+    <script src="{{ asset('js/pages/berkasPerkara/perkaraReport.js') }}"></script>
 @endsection
