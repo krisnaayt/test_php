@@ -255,4 +255,8 @@ class BerkasPerkaraController extends Controller
             return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
         }
     }
+
+    public function test(){
+        
+    }
 }
