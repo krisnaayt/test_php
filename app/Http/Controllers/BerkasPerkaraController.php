@@ -19,24 +19,43 @@ class BerkasPerkaraController extends Controller
     }
 
     public function get(){
-        $data = DB::select("call get_list_berkas_perkara(null)");
+        $user = Auth::user();
+
+        $idUser = $user->id_user;
+        $role = $user->role ? $user->role : 'NULL';
+        
+
+        $data = DB::select("call get_list_berkas_perkara("."'".$role."'".", ".$idUser.")");
         return DataTables::of($data)
         ->editColumn('berkas_status', function($row){
             $status = '<div class="'.$row->badge.'">'.$row->berkas_status.'</div>';
             return $status;
         })
-        ->addColumn('actions', function($row){
+        ->addColumn('actions', function($row) use($role, $idUser){
             $actions = '<div class="text-center">';
             $actions .= '<a title="Detail" class="btn btn-icon btn-xs btn-info" role="button" href="' . URL::to('berkasPerkara/detail/' . encrypt($row->id_berkas)) . '"><i class="fa fa-search"></i></a> ';
-            if($row->id_berkas_status == 1 or $row->id_berkas_status == 3){
-                $actions .= '<a title="Edit" class="btn btn-icon btn-xs btn-warning" role="button" href="' . URL::to('berkasPerkara/edit/' . encrypt($row->id_berkas)) . '"><i class="fa fa-pencil-square-o"></i></a> ';
+            
+            if($row->created_by == $idUser){
+                if($row->id_berkas_status == 1 or $row->id_berkas_status == 3){
+                    $actions .= '<a title="Edit" class="btn btn-icon btn-xs btn-warning" role="button" href="' . URL::to('berkasPerkara/edit/' . encrypt($row->id_berkas)) . '"><i class="fa fa-pencil-square-o"></i></a> ';
+                }
             }
-            if($row->id_berkas_status == 1){
-                $actions .= '<a title="Review" class="btn btn-icon btn-xs btn-success" role="button" href="' . URL::to('berkasPerkara/review/' . encrypt($row->id_berkas)) . '"><i class="fa fa-share"></i></a> ';
+            
+            if(($role == 'panmud_gugatan' and $row->grup_jenis_perkara == 'G') or ($role == 'panmud_permohonan' and $row->grup_jenis_perkara == 'P')){
+                if($row->id_berkas_status == 1){
+                    $actions .= '<a title="Review" class="btn btn-icon btn-xs btn-success" role="button" href="' . URL::to('berkasPerkara/review/' . encrypt($row->id_berkas)) . '"><i class="fa fa-share"></i></a> ';
+                }
+                if($row->id_berkas_status == 2){
+                    $actions .= '<a title="Set BHT" class="btn btn-icon btn-xs btn-primary" role="button" href="' . URL::to('berkasPerkara/setBht/' . encrypt($row->id_berkas)) . '"><i class="fa fa-gavel"></i></a> ';
+                }
             }
-            if($row->id_berkas_status == 2){
-                $actions .= '<a title="Set BHT" class="btn btn-icon btn-xs btn-primary" role="button" href="' . URL::to('berkasPerkara/setBht/' . encrypt($row->id_berkas)) . '"><i class="fa fa-gavel"></i></a> ';
+            
+            if($role == 'panmud_hukum'){
+                if($row->id_berkas_status == 4){
+                    $actions .= '<a title="Diarsipkan" class="btn btn-icon btn-xs btn-dark" role="button" href="' . URL::to('berkasPerkara/setArsip/' . encrypt($row->id_berkas)) . '"><i class="fa fa-bookmark"></i></a> ';
+                }
             }
+
             // $actions .= '<button type="button" title="Delete" class="btn btn-icon btn-xs btn-danger" role="button" id="deleteSuratBtn" data-id="' . encrypt($row->id_berkas) . '"><i class="fa fa-trash-o"></i></button> ';
             $actions .= '</div>';
             return $actions;
@@ -67,6 +86,7 @@ class BerkasPerkaraController extends Controller
             $berkas->kode_berkas = $kodeBerkas;
             $berkas->tgl_penyerahan = $this->convertToDBDate($request->tglPenyerahan);
             $berkas->id_berkas_status =  1;
+            $berkas->grup_jenis_perkara = $request->grupJenisPerkara;
             $berkas->created_by = Auth::user()->id_user;
             $berkas->created_at = now();
             $berkas->save();
@@ -98,8 +118,8 @@ class BerkasPerkaraController extends Controller
         }
     }
 
-    public function getJenisPerkara(){
-        $jenisPerkara = Jenis_perkara::selectRaw("*, concat(kode_jenis_perkara, ' - ', jenis_perkara) as nama_jenis_perkara")->get();
+    public function getJenisPerkara($grupJenisPerkara){
+        $jenisPerkara = Jenis_perkara::selectRaw("*, concat(kode_jenis_perkara, ' - ', jenis_perkara) as nama_jenis_perkara")->where('grup_jenis_perkara', $grupJenisPerkara)->get();
 
         return response()->json(['status' => true, 'message' => '', 'data' => ['jenisPerkara'=>$jenisPerkara]], 200);
     }
@@ -247,6 +267,40 @@ class BerkasPerkaraController extends Controller
                 $perkara->tgl_bht = $this->convertToDBDate($item);
                 $perkara->save();
             }
+
+            DB::commit();
+            return response()->json(['status' => true, 'message' => '', 'data' => []], 200);
+        }catch(\Exception $e){
+            DB::rollback();
+            return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
+        }
+    }
+
+    public function setArsip($id){
+        $berkas = Berkas_perkara::with('perkara.jenisPerkara', 'berkasStatus')->find(decrypt($id));
+
+        $berkas->tgl_penyerahan = $this->convertToViewDate($berkas->tgl_penyerahan);
+        $berkas->created = $berkas->userCreated->nama .' pada '. $this->convertToViewDateTime($berkas->created_at);
+        $berkas->updated = $berkas->updated_at ? $berkas->userUpdated->nama .' pada '. $this->convertToViewDateTime($berkas->updated_at) : '';
+        $berkas->approved = $berkas->approved_at ? $berkas->userApproved->nama .' pada '. $this->convertToViewDateTime($berkas->approved_at) : '';
+        $berkas->rejected = $berkas->rejected_at ? $berkas->userRejected->nama .' pada '. $this->convertToViewDateTime($berkas->rejected_at) : '';
+        foreach($berkas->perkara as $perkara){
+            $perkara->tgl_putus = $this->convertToViewDate($perkara->tgl_putus);
+            $perkara->tgl_minutasi = $this->convertToViewDate($perkara->tgl_minutasi);  
+            $perkara->tgl_bht =$this->convertToViewDate($perkara->tgl_bht);     
+        }
+        return view('pages.berkasPerkara.arsip', compact('berkas'));
+    }
+
+    public function storeSetArsip(Request $request){
+        DB::beginTransaction();
+        try{
+
+            $berkas = Berkas_perkara::find(decrypt($request->idBerkas));
+            $berkas->id_berkas_status = 5;
+            $berkas->set_arsip_by = Auth::user()->id_user;
+            $berkas->set_arsip_at = now();
+            $berkas->save();
 
             DB::commit();
             return response()->json(['status' => true, 'message' => '', 'data' => []], 200);

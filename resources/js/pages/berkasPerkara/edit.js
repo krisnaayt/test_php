@@ -1,4 +1,7 @@
 $(function() {
+    
+    var grupJenisPerkara  = $("input[name=grupJenisPerkara]:checked").val()
+
     $.ajax({
         type: 'post',
         url: window.location.origin + '/berkasPerkara/getBerkasPerkara',
@@ -9,9 +12,16 @@ $(function() {
         var berkas = res.data.berkas
         $('#kodeBerkas').val(berkas.kode_berkas);
         $("#tglPenyerahan").datepicker("update", berkas.tgl_penyerahan);
+        if(berkas.grup_jenis_perkara == 'G'){
+            $('#grupJenisPerkaraG').prop('checked', true)
+        }else{
+            $('#grupJenisPerkaraP').prop('checked', true)
+        }
+        grupJenisPerkara  = $("input[name=grupJenisPerkara]:checked").val()
+
         
         berkas.perkara.map(function(item){
-            addPerkaraRow(item.no_perkara, item.id_jenis_perkara, item.tgl_putus, item.tgl_minutasi, item.tgl_bht)
+            addPerkaraRow(item.no_perkara, item.id_jenis_perkara, item.tgl_putus, item.tgl_minutasi, item.tgl_bht, grupJenisPerkara)
         })
 
     }).fail(function(){
@@ -21,10 +31,10 @@ $(function() {
     var perkaraRowId = 1;
     var perkaraRowNo = 1;
 
-    function addPerkaraRow(noPerkara, idJenisPerkara, tglPutus, tglMinutasi, tglBht){
+    function addPerkaraRow(noPerkara, idJenisPerkara, tglPutus, tglMinutasi, tglBht, grupJenisPerkara){
         $.ajax({
             type: 'get',
-            url: window.location.origin + '/berkasPerkara/getJenisPerkara'
+            url: window.location.origin + '/berkasPerkara/getJenisPerkara/'+grupJenisPerkara
         }).done(function(res){
             var jenisPerkara = res.data.jenisPerkara
 
@@ -126,7 +136,7 @@ $(function() {
     }
 
     $(document).on('click', '#addPerkaraBtn', function(){
-        addPerkaraRow('', '', '', '', '');
+        addPerkaraRow('', '', '', '', '', grupJenisPerkara);
     })
 
     function resetRowNo(){

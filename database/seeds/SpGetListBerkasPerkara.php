@@ -14,7 +14,8 @@ class SpGetListBerkasPerkara extends Seeder
         DB::unprepared("DROP PROCEDURE IF EXISTS get_list_berkas_perkara;");
         
         DB::unprepared("CREATE PROCEDURE get_list_berkas_perkara(
-            in kode_berkas_ varchar(20)
+            role_ varchar(50),
+            id_user_created_ int
         )
         begin
         select
@@ -28,18 +29,43 @@ class SpGetListBerkasPerkara extends Seeder
             concat(u_cr.nama, ' pada ', date_format(bp.created_at, '%d/%m/%Y %H:%i')) as created,
             concat(u_up.nama, ' pada ', date_format(bp.updated_at, '%d/%m/%Y %H:%i')) as updated,
             concat(u_ap.nama, ' pada ', date_format(bp.approved_at, '%d/%m/%Y %H:%i')) as approved,
-            concat(u_re.nama, ' pada ', date_format(bp.rejected_at, '%d/%m/%Y %H:%i')) as rejected
+            concat(u_re.nama, ' pada ', date_format(bp.rejected_at, '%d/%m/%Y %H:%i')) as rejected,
+            bp.created_by,
+            bp.grup_jenis_perkara
             from
             tb_berkas_perkara bp
             join tb_perkara p on bp.kode_berkas = p.kode_berkas 
-            join tb_berkas_status bs on bp.id_berkas_status = bs.id_berkas_status 
+            join tb_berkas_status bs on bp.id_berkas_status = bs.id_berkas_status
+            join tb_jenis_perkara jp on p.id_jenis_perkara = jp.id_jenis_perkara 
             join tb_user u_cr on bp.created_by = u_cr.id_user 
             left join tb_user u_up on bp.updated_by = u_up.id_user 
             left join tb_user u_ap on bp.approved_by = u_ap.id_user 
             left join tb_user u_re on bp.rejected_by = u_re.id_user
+            where
+            case
+                when role_ is not null and id_user_created_ is not null then 
+                    case
+                        when role_ = 'panitera_pengganti' then
+                            bp.created_by = id_user_created_
+                        when role_ = 'panmud_gugatan' then
+                            bp.grup_jenis_perkara = 'G' or bp.created_by = id_user_created_
+                        when role_ = 'panmud_permohonan' then
+                            bp.grup_jenis_perkara = 'P' or bp.created_by = id_user_created_
+                        -- when role_ = 'panmud_permohonan_' or role_ = 'panmud_gugatan' then
+                        --     case 
+                        --         when role_ = 'panmud_permohonan_' then
+                        --             bp.grup_jenis_perkara = 'P'
+                        --         else 
+                        --             bp.grup_jenis_perkara = 'G'
+                        --     end
+                        else true
+                    end
+                else true
+            end
 			group by bp.id_berkas, bp.kode_berkas, bp.tgl_penyerahan, bp.id_berkas_status, bs.berkas_status, bs.badge,
             u_cr.nama, u_up.nama, u_ap.nama, u_re.nama,
-            created, updated, approved, rejected
+            created, updated, approved, rejected,
+            bp.created_by, bp.grup_jenis_perkara
             order by bp.id_berkas desc
             ;
         end

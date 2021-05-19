@@ -25,7 +25,7 @@ class PermissionMiddleware
         }
         if($userGroup == 'admin_surat' and ($segment1 == 'suratPanjar' or $segment1 == 'suratReport')){
             return $next($request);
-        }elseif($userGroup == 'admin_emus' and $segment1 == 'berkasPerkara'){
+        }elseif($userGroup == 'admin_emus' and ($segment1 == 'berkasPerkara' or $segment1 == 'perkaraReport')){
             return $next($request);
         }else{
             return abort(401);

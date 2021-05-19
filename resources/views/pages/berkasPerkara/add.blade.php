@@ -41,6 +41,50 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-4">
+                                            {{-- <div class="form-group">
+                                                <label for="grupJenisPerkara">Jenis Perkara</label>
+                                                <div class="controls">
+                                                    <div class="d-inline-block custom-control custom-checkbox mr-1">
+                                                        <input type="checkbox" class="custom-control-input" name="grupJenisPerkara" value="G" id="grupJenisPerkaraG">
+                                                        <label class="custom-control-label" for="grupJenisPerkaraG">Gugatan</label>
+                                                    </div>
+                                                    <div class="d-inline-block custom-control custom-checkbox mr-1">
+                                                        <input type="checkbox" class="custom-control-input" name="grupJenisPerkara" value="P" id="grupJenisPerkaraP">
+                                                        <label class="custom-control-label" for="grupJenisPerkaraP">Permohonan</label>
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+                                            <div class="form-group">
+                                                <label for="grupJenisPerkara">Jenis Perkara</label>
+                                                <ul class="list-unstyled mb-0">
+                                                    <li class="d-inline-block mr-2">
+                                                        <fieldset>
+                                                            <div class="vs-radio-con">
+                                                                <input type="radio" name="grupJenisPerkara" value="G" checked>
+                                                                <span class="vs-radio">
+                                                                    <span class="vs-radio--border"></span>
+                                                                    <span class="vs-radio--circle"></span>
+                                                                </span>
+                                                                <span class="">Gugatan</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </li>
+                                                    <li class="d-inline-block mr-2">
+                                                        <fieldset>
+                                                            <div class="vs-radio-con">
+                                                                <input type="radio" name="grupJenisPerkara" value="P">
+                                                                <span class="vs-radio">
+                                                                    <span class="vs-radio--border"></span>
+                                                                    <span class="vs-radio--circle"></span>
+                                                                </span>
+                                                                <span class="">Permohonan</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="row">

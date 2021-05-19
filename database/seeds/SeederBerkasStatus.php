@@ -25,7 +25,8 @@ class SeederBerkasStatus extends Seeder
             ('1', 'Menunggu', 'badge badge-info'),
             ('2', 'Diterima', 'badge badge-success'),
             ('3', 'Ditolak', 'badge badge-danger'),
-            ('4', 'BHT', 'badge badge-primary')
+            ('4', 'BHT', 'badge badge-primary'),
+            ('5', 'Diarsipkan', 'badge badge-dark')
             ;
         ");
     }

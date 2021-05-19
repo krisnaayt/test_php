@@ -21,6 +21,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="grupJenisPerkara">Jenis Perkara</label>
+                                                <ul class="list-unstyled mb-0">
+                                                    <li class="d-inline-block mr-2">
+                                                        <fieldset>
+                                                            <div class="vs-radio-con">
+                                                                <input type="radio" name="grupJenisPerkara" value="G" id="grupJenisPerkaraG" disabled {{ $berkas->grup_jenis_perkara == 'G' ? 'checked' : '' }}>
+                                                                <span class="vs-radio">
+                                                                    <span class="vs-radio--border"></span>
+                                                                    <span class="vs-radio--circle"></span>
+                                                                </span>
+                                                                <span class="">Gugatan</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </li>
+                                                    <li class="d-inline-block mr-2">
+                                                        <fieldset>
+                                                            <div class="vs-radio-con">
+                                                                <input type="radio" name="grupJenisPerkara" value="P" id="grupJenisPerkaraP" disabled {{ $berkas->grup_jenis_perkara == 'P' ? 'checked' : '' }}>
+                                                                <span class="vs-radio">
+                                                                    <span class="vs-radio--border"></span>
+                                                                    <span class="vs-radio--circle"></span>
+                                                                </span>
+                                                                <span class="">Permohonan</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label for="status">Status Terakhir</label>
@@ -29,6 +60,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label for="createdBy">Dibuat</label>
@@ -37,8 +70,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label for="updatedBy">Di-update</label>
@@ -63,6 +94,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label for="ketStatus">Keterangan</label>
