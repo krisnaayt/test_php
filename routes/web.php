@@ -45,7 +45,7 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::get('/get', 'BerkasPerkaraController@get');
             Route::get('/add', 'BerkasPerkaraController@add');
             Route::post('/store', 'BerkasPerkaraController@store');
-            Route::get('/getJenisPerkara', 'BerkasPerkaraController@getJenisPerkara');
+            Route::get('/getJenisPerkara/{grupJenisPerkara}', 'BerkasPerkaraController@getJenisPerkara');
             Route::get('/detail/{id}', 'BerkasPerkaraController@detail');
             Route::get('/edit/{id}', 'BerkasPerkaraController@edit');
             Route::post('/getBerkasPerkara', 'BerkasPerkaraController@getBerkasPerkara');
@@ -54,7 +54,15 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::post('/storeReview', 'BerkasPerkaraController@storeReview');
             Route::get('/setBht/{id}', 'BerkasPerkaraController@setBht');
             Route::post('/storeSetBht', 'BerkasPerkaraController@storeSetBht');
+            Route::get('/setArsip/{id}', 'BerkasPerkaraController@setArsip');
+            Route::post('/storeSetArsip', 'BerkasPerkaraController@storeSetArsip');
 
         });
+
+        Route::prefix('perkaraReport')->group(function(){
+            Route::get('/', 'PerkaraReportController@index');
+            Route::get('/export', 'PerkaraReportController@export');
+        });
+
     });
 });

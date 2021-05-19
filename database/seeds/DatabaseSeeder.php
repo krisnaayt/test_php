@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SpGetListSuratPanjar::class);
         $this->call(SpGetListBerkasPerkara::class);
         $this->call(SpGetSuratReport::class);
+        $this->call(SpGetPerkaraReport::class);
     }
 }

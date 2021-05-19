@@ -96,11 +96,19 @@
 $(function () {
   var perkaraRowId = 1;
   var perkaraRowNo = 1;
+  var grupJenisPerkara = $("input[name=grupJenisPerkara]:checked").val();
+  addPerkaraRow(grupJenisPerkara);
+  $("input[name=grupJenisPerkara]").on("change", function () {
+    grupJenisPerkara = $(this).val();
+    $('#perkaraTbody').html('');
+    resetRowNo();
+    addPerkaraRow(grupJenisPerkara);
+  });
 
-  function addPerkaraRow() {
+  function addPerkaraRow(grupJenisPerkara) {
     $.ajax({
       type: 'get',
-      url: window.location.origin + '/berkasPerkara/getJenisPerkara'
+      url: window.location.origin + '/berkasPerkara/getJenisPerkara/' + grupJenisPerkara
     }).done(function (res) {
       var jenisPerkara = res.data.jenisPerkara;
       perkaraContent = "";
@@ -146,9 +154,8 @@ $(function () {
     }).fail(function (res) {});
   }
 
-  addPerkaraRow();
   $(document).on('click', '#addPerkaraBtn', function () {
-    addPerkaraRow();
+    addPerkaraRow(grupJenisPerkara);
   });
 
   function resetRowNo() {
