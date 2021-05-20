@@ -22,7 +22,7 @@
             </div>
             <hr>
             <div class="card-content">
-                <div class="card-body pt-0">
+                <div class="card-body pt-0 overflow-auto">
                     <div class="row">
                         <div id="exportContent">
                             <div class="col-12">
