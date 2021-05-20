@@ -3,7 +3,7 @@
     <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-without-dd-arrow navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ $userInfo->user_group == 'admin' or $userInfo->user_group == 'admin_surat' ? URL::to('suratPanjar') : ($userInfo->user_group == 'admin_emus' ? URL::to('berkasPerkara') : '') }}">
+                <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ $userInfo->user_group == 'admin' || $userInfo->user_group == 'admin_surat' ? URL::to('suratPanjar') : URL::to('berkasPerkara') }}">
                         {{-- <div class="brand-logo"></div> --}}
                         <img src="{{ asset('images/logo_pa_batulicin.png') }}" style="max-width: 15%; max-height: 15%">
                         <h2 class="brand-text mb-0">PA Batulicin</h2>

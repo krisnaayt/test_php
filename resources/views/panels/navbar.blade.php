@@ -3,7 +3,7 @@
     <div class="navbar-header d-xl-block d-none">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item">
-                <a class="navbar-brand" href="{{ $userInfo->user_group == 'admin_surat' ? URL::to('suratPanjar') : ($userInfo->user_group == 'admin_emus' ? URL::to('berkasPerkara') : '') }}">
+                <a class="navbar-brand" href="{{ $userInfo->user_group == 'admin' || $userInfo->user_group == 'admin_surat' ? URL::to('suratPanjar') : URL::to('berkasPerkara') }}">
                     <img class="font-weight-bold" src="{{ asset('images/logo_pa_batulicin.png') }}" style="max-width: 9%; max-height: 9%">
                     &nbsp;<strong>PA Batulicin</strong>
                 </a>
