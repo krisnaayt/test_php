@@ -64,5 +64,11 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::get('/export', 'PerkaraReportController@export');
         });
 
+        Route::prefix('notif')->group(function(){
+            Route::get('/readNotif/{id}', 'NotifController@readNotif');
+            Route::get('/readAllNotif', 'NotifController@readAllNotif');
+            Route::get('/getNotif', 'NotifController@getNotif');
+        });
+
     });
 });

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,8 +112,9 @@ $(function () {
         url: window.location.origin + "/berkasPerkara/storeSetArsip",
         data: data
       }).done(function (res) {
-        enableFormButton(btnContent);
-        swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara');
+        enableFormButton(btnContent); // swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
+
+        console.log(res);
       }).fail(function (res) {
         enableFormButton(btnContent);
         swal('error', 'Server Error', 'Data gagal disimpan');
@@ -129,7 +130,7 @@ $(function () {
 
 /***/ }),
 
-/***/ 13:
+/***/ 14:
 /*!*********************************************************!*\
   !*** multi ./resources/js/pages/berkasPerkara/arsip.js ***!
   \*********************************************************/

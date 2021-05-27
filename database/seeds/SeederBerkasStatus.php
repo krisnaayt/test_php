@@ -11,23 +11,29 @@ class SeederBerkasStatus extends Seeder
      */
     public function run()
     {
-        // DB::statement("
-        //     delete from tb_berkas_status;
-        // ");
+        $this->call(SetForeignKeyChecksOff::class);
+
+        DB::statement("
+            truncate tb_berkas_status;
+        ");
         
         DB::statement("
-            insert ignore into tb_berkas_status(
+            insert into tb_berkas_status(
                 id_berkas_status,
                 berkas_status,
-                badge
+                badge,
+                color,
+                fa_icon
             )
             values
-            ('1', 'Menunggu', 'badge badge-info'),
-            ('2', 'Diterima', 'badge badge-success'),
-            ('3', 'Ditolak', 'badge badge-danger'),
-            ('4', 'BHT', 'badge badge-primary'),
-            ('5', 'Diarsipkan', 'badge badge-dark')
+            ('1', 'Diajukan', 'badge badge-info', 'info', 'fa fa-share'),
+            ('2', 'Diterima', 'badge badge-success', 'success', 'fa fa-check-circle'),
+            ('3', 'Ditolak', 'badge badge-danger', 'danger', 'fa fa-times-circle'),
+            ('4', 'BHT', 'badge badge-primary', 'primary', 'fa fa-gavel'),
+            ('5', 'Diarsipkan', 'badge badge-dark', 'dark', 'fa fa-bookmark')
             ;
         ");
+        
+        $this->call(SetForeignKeyChecksOn::class);
     }
 }

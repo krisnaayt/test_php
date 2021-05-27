@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SeederUser::class);
         $this->call(SeederJenisPerkara::class);
         $this->call(SeederBerkasStatus::class);
+        $this->call(SeederGrupJenisPerkara::class);
         
         $this->call(SpGetListSuratPanjar::class);
         $this->call(SpGetListBerkasPerkara::class);

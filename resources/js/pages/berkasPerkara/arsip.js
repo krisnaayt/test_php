@@ -22,7 +22,8 @@ $(function() {
             })
                 .done(function(res) {
                     enableFormButton(btnContent)
-                    swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
+                    // swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
+                    console.log(res)
                 })
                 .fail(function(res) {
                     enableFormButton(btnContent)

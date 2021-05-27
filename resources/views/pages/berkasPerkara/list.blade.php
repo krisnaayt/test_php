@@ -39,10 +39,11 @@
                                                     <th class="text-center">No.</th>
                                                     <th class="text-center">Kode Berkas</th>
                                                     <th class="text-center">Tgl Penyerahan</th>
+                                                    <th class="text-center">Jenis Perkara</th>
                                                     <th class="text-center">Perkara</th>
                                                     <th class="text-center">Status Terakhir</th>
                                                     <th class="text-center">Dibuat</th>
-                                                    <th class="text-center">Diterima</th>
+                                                    {{-- <th class="text-center">Diterima</th> --}}
                                                     <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>

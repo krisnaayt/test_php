@@ -11,12 +11,14 @@ class SeederJenisPerkara extends Seeder
      */
     public function run()
     {
-        // DB::statement("
-        //     delete from tb_jenis_perkara;
-        // ");
+        $this->call(SetForeignKeyChecksOff::class);
 
         DB::statement("
-            insert ignore into tb_jenis_perkara(
+            truncate tb_jenis_perkara;
+        ");
+
+        DB::statement("
+            insert into tb_jenis_perkara(
                 id_jenis_perkara,
                 kode_jenis_perkara,
                 jenis_perkara,
@@ -40,5 +42,7 @@ class SeederJenisPerkara extends Seeder
 
             ;
         ");
+        
+        $this->call(SetForeignKeyChecksOn::class);
     }
 }

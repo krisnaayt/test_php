@@ -13,11 +13,15 @@ class AddConstraintBerkasStatusInTbBerkasPerkaraTable extends Migration
      */
     public function up()
     {
+        DB::statement("SET FOREIGN_KEY_CHECKS = 0; ");
+
         DB::statement("
             alter table tb_berkas_perkara
             add constraint fk_tb_berkas_perkara_id_berkas_status foreign key (id_berkas_status) references tb_berkas_status(id_berkas_status) on update cascade on delete restrict
             ;
         ");
+        
+        DB::statement("SET FOREIGN_KEY_CHECKS = 1; ");
     }
 
     /**

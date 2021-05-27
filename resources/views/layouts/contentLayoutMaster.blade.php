@@ -11,6 +11,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/favicon.ico') }}">
 
     @include('panels/styles')
+    
+    {{-- Socket IO --}}
+    <script src="https://cdn.socket.io/4.1.1/socket.io.min.js" integrity="sha384-cdrFIqe3RasCMNE0jeFG9xJHog/tgOVC1E9Lzve8LQN1g5WUHo0Kvk1mawWjxX7a" crossorigin="anonymous"></script>
+
+    <script>
+        // const socket = io('http://pa-apps.local:8090');
+    </script>
+
+
 
 </head>
 

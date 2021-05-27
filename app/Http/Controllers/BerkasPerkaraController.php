@@ -110,8 +110,10 @@ class BerkasPerkaraController extends Controller
                 $perkara->save();
             }
 
+            $notif = $this->createNotifBerkas($berkas->kode_berkas, $berkas->id_berkas_status, $berkas->grup_jenis_perkara, $berkas->created_by);
+
             DB::commit();
-            return response()->json(['status' => true, 'message' => '', 'data' => []], 200);
+            return response()->json(['status' => true, 'message' => '', 'data' => ['berkas'=>$berkas, 'notif'=>$notif]], 200);
         }catch(\Exception $e){
             DB::rollback();
             return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
@@ -137,6 +139,9 @@ class BerkasPerkaraController extends Controller
             $perkara->tgl_minutasi = $this->convertToViewDate($perkara->tgl_minutasi);  
             $perkara->tgl_bht =$this->convertToViewDate($perkara->tgl_bht);     
         }
+
+        // delete notif
+        $this->deleteNotif($berkas->kode_berkas);
 
         return view('pages.berkasPerkara.detail', compact('berkas'));
         // return response()->json($berkas);
@@ -213,24 +218,37 @@ class BerkasPerkaraController extends Controller
             $perkara->tgl_bht =$this->convertToViewDate($perkara->tgl_bht);     
         }
 
+        // delete notif
+        $this->deleteNotif($berkas->kode_berkas);
+
         return view('pages.berkasPerkara.review', compact('berkas'));
     }
 
     public function storeReview(Request $request){
         
-        $berkas = Berkas_perkara::find(decrypt($request->idBerkas));
-        $berkas->id_berkas_status = $request->idBerkasStatus;
-        if($request->idBerkasStatus == '2'){
-            $berkas->approved_by = Auth::user()->id_user;
-            $berkas->approved_at = now();
-        }else{
-            $berkas->rejected_by = Auth::user()->id_user;
-            $berkas->rejected_at = now();
-        }
-        $berkas->ket_status = $request->ketStatus;
-        $berkas->save();
+        DB::beginTransaction();
+        try{
 
-        return response()->json(['status' => true, 'message' => '', 'data' => []], 200);
+            $berkas = Berkas_perkara::find(decrypt($request->idBerkas));
+            $berkas->id_berkas_status = $request->idBerkasStatus;
+            if($request->idBerkasStatus == '2'){
+                $berkas->approved_by = Auth::user()->id_user;
+                $berkas->approved_at = now();
+            }else{
+                $berkas->rejected_by = Auth::user()->id_user;
+                $berkas->rejected_at = now();
+            }
+            $berkas->ket_status = $request->ketStatus;
+            $berkas->save();
+
+            $notif = $this->createNotifBerkas($berkas->kode_berkas, $berkas->id_berkas_status, $berkas->grup_jenis_perkara, $berkas->created_by);
+
+            DB::commit();
+            return response()->json(['status' => true, 'message' => '', 'data' => ['berkas'=>$berkas, 'notif'=>$notif]], 200);
+        }catch(\Exception $e){
+            DB::rollback();
+            return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
+        }
     }
 
     public function setBht($id){
@@ -246,8 +264,11 @@ class BerkasPerkaraController extends Controller
             $perkara->tgl_minutasi = $this->convertToViewDate($perkara->tgl_minutasi);  
             $perkara->tgl_bht =$this->convertToViewDate($perkara->tgl_bht);     
         }
+
+        // delete notif
+        $this->deleteNotif($berkas->kode_berkas);
+
         return view('pages.berkasPerkara.bht', compact('berkas'));
-        // return response()->json($berkas);
     }
 
     public function storeSetBht(Request $request){
@@ -268,8 +289,10 @@ class BerkasPerkaraController extends Controller
                 $perkara->save();
             }
 
+            $notif = $this->createNotifBerkas($berkas->kode_berkas, $berkas->id_berkas_status, $berkas->grup_jenis_perkara, $berkas->created_by);
+
             DB::commit();
-            return response()->json(['status' => true, 'message' => '', 'data' => []], 200);
+            return response()->json(['status' => true, 'message' => '', 'data' => ['berkas'=>$berkas, 'notif'=>$notif]], 200);
         }catch(\Exception $e){
             DB::rollback();
             return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
@@ -289,6 +312,10 @@ class BerkasPerkaraController extends Controller
             $perkara->tgl_minutasi = $this->convertToViewDate($perkara->tgl_minutasi);  
             $perkara->tgl_bht =$this->convertToViewDate($perkara->tgl_bht);     
         }
+
+        // delete notif
+        $this->deleteNotif($berkas->kode_berkas);
+
         return view('pages.berkasPerkara.arsip', compact('berkas'));
     }
 
@@ -302,8 +329,10 @@ class BerkasPerkaraController extends Controller
             $berkas->set_arsip_at = now();
             $berkas->save();
 
+            $notif = $this->createNotifBerkas($berkas->kode_berkas, $berkas->id_berkas_status, $berkas->grup_jenis_perkara, $berkas->created_by);
+
             DB::commit();
-            return response()->json(['status' => true, 'message' => '', 'data' => []], 200);
+            return response()->json(['status' => true, 'message' => '', 'data' => ['berkas'=>$berkas, 'notif'=>$notif]], 200);
         }catch(\Exception $e){
             DB::rollback();
             return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);

@@ -11,12 +11,14 @@ class SeederUser extends Seeder
      */
     public function run()
     {
-        // DB::statement("
-        //     delete from tb_user;
-        // ");
+        $this->call(SetForeignKeyChecksOff::class);
 
         DB::statement("
-            insert ignore into tb_user(
+            truncate tb_user;
+        ");
+
+        DB::statement("
+            insert into tb_user(
                 id_user,
                 username,
                 email,
@@ -38,5 +40,7 @@ class SeederUser extends Seeder
             ('7', 'panmud_hukum', 'pa.batulicin@gmail.com', '$2y$10\$eyhZ1SUoIox1ad5ecgtQZO4bICf9pbjPZXnnna\/QNrYqCYqty5FrC', 'admin_emus', 'Panitera Muda Hukum', '', 'Panitera Muda Hukum', 'panmud_hukum')
             ;
         ");
+
+        $this->call(SetForeignKeyChecksOn::class);
     }
 }

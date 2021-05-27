@@ -19,6 +19,9 @@ $(function() {
                 data: "tgl_penyerahan"
             },
             {
+                data: "grup_jenis_perkara"
+            },
+            {
                 data: "no_perkara"
             },
             {
@@ -27,9 +30,9 @@ $(function() {
             {
                 data: "created"
             },
-            {
-                data: "approved"
-            },
+            // {
+            //     data: "approved"
+            // },
             {
                 data: "actions"
             }

@@ -15,6 +15,7 @@ mix
 .js('resources/js/app.js', 'public/js')
     // .js('resources/js/globalCustom.js', 'public/js')
     .js('resources/js/auth/login.js', 'public/js/auth')
+    .js('resources/js/layout/notif.js', 'public/js/layout')
     .js('resources/js/pages/suratPanjar/list.js', 'public/js/pages/suratPanjar')
     .js('resources/js/pages/suratPanjar/add.js', 'public/js/pages/suratPanjar')
     .js('resources/js/pages/suratPanjar/edit.js', 'public/js/pages/suratPanjar')
