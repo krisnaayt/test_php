@@ -389,3 +389,7 @@ $.ajaxSetup({
       enableButton('#'+item.id, item.text)
     })  
   }
+
+  function sendMessage(data){
+    socket.emit('sendMessage', data);
+  }

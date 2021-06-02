@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -96,10 +96,7 @@
 $(function () {
   $("#setBhtForm").validate({
     ignore: ":hidden",
-    rules: {// tglPenyerahan: {
-      //     required: true
-      // }
-    },
+    rules: {},
     errorPlacement: function errorPlacement(error, element) {
       error.appendTo(element.closest(".controls"));
     },
@@ -107,16 +104,33 @@ $(function () {
       var btnContent = getFormButton('.formBtn');
       disableFormButton(btnContent);
       var data = $(form).serialize();
-      $.ajax({
-        type: "post",
-        url: window.location.origin + "/berkasPerkara/storeSetBht",
-        data: data
-      }).done(function (res) {
-        enableFormButton(btnContent);
-        swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara');
-      }).fail(function (res) {
-        enableFormButton(btnContent);
-        swal('error', 'Server Error', 'Data gagal disimpan');
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: 'Berkas akan di-set BHT',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        confirmButtonClass: 'btn btn-primary',
+        cancelButtonClass: 'btn btn-warning ml-1',
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.value) {
+          $.ajax({
+            type: "post",
+            url: window.location.origin + "/berkasPerkara/storeSetBht",
+            data: data
+          }).done(function (res) {
+            enableFormButton(btnContent);
+            swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara'); // socket
+
+            sendMessage(null);
+          }).fail(function (res) {
+            enableFormButton(btnContent);
+            swal('error', 'Server Error', 'Data gagal disimpan');
+          });
+        } else {
+          enableFormButton(btnContent);
+        }
       });
     }
   });
@@ -129,7 +143,7 @@ $(function () {
 
 /***/ }),
 
-/***/ 12:
+/***/ 13:
 /*!*******************************************************!*\
   !*** multi ./resources/js/pages/berkasPerkara/bht.js ***!
   \*******************************************************/

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -110,14 +110,17 @@ $(function () {
     }, {
       data: "tgl_penyerahan"
     }, {
+      data: "grup_jenis_perkara"
+    }, {
       data: "no_perkara"
     }, {
       data: "berkas_status"
     }, {
       data: "created"
-    }, {
-      data: "approved"
-    }, {
+    }, // {
+    //     data: "approved"
+    // },
+    {
       data: "actions"
     }],
     columnDefs: [{
@@ -130,7 +133,7 @@ $(function () {
 
 /***/ }),
 
-/***/ 7:
+/***/ 8:
 /*!********************************************************!*\
   !*** multi ./resources/js/pages/berkasPerkara/list.js ***!
   \********************************************************/

@@ -31,12 +31,14 @@ class SpGetListBerkasPerkara extends Seeder
             concat(u_ap.nama, ' pada ', date_format(bp.approved_at, '%d/%m/%Y %H:%i')) as approved,
             concat(u_re.nama, ' pada ', date_format(bp.rejected_at, '%d/%m/%Y %H:%i')) as rejected,
             bp.created_by,
-            bp.grup_jenis_perkara
+            bp.grup_jenis_perkara,
+            gjp.nama_grup_jenis_perkara
             from
             tb_berkas_perkara bp
             join tb_perkara p on bp.kode_berkas = p.kode_berkas 
             join tb_berkas_status bs on bp.id_berkas_status = bs.id_berkas_status
-            join tb_jenis_perkara jp on p.id_jenis_perkara = jp.id_jenis_perkara 
+            join tb_jenis_perkara jp on p.id_jenis_perkara = jp.id_jenis_perkara
+            join tb_grup_jenis_perkara gjp on bp.grup_jenis_perkara = gjp.grup_jenis_perkara 
             join tb_user u_cr on bp.created_by = u_cr.id_user 
             left join tb_user u_up on bp.updated_by = u_up.id_user 
             left join tb_user u_ap on bp.approved_by = u_ap.id_user 
@@ -65,7 +67,8 @@ class SpGetListBerkasPerkara extends Seeder
 			group by bp.id_berkas, bp.kode_berkas, bp.tgl_penyerahan, bp.id_berkas_status, bs.berkas_status, bs.badge,
             u_cr.nama, u_up.nama, u_ap.nama, u_re.nama,
             created, updated, approved, rejected,
-            bp.created_by, bp.grup_jenis_perkara
+            bp.created_by, 
+            bp.grup_jenis_perkara, gjp.nama_grup_jenis_perkara
             order by bp.id_berkas desc
             ;
         end

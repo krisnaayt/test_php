@@ -81,32 +81,66 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/pages/berkasPerkara/review.js":
-/*!****************************************************!*\
-  !*** ./resources/js/pages/berkasPerkara/review.js ***!
-  \****************************************************/
+/***/ "./resources/js/layout/notif.js":
+/*!**************************************!*\
+  !*** ./resources/js/layout/notif.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
 $(function () {
-  $('.actionBtn').on('click', function () {
-    var btnContent = getFormButton('.formBtn');
-    disableFormButton(btnContent);
-    var idBerkasStatus = $(this).data('id');
-    var text = idBerkasStatus == 2 ? 'Anda menerima berkas tersebut' : 'Anda menolak berkas tersebut';
-    var data = $('#reviewBerkasPerkaraForm').serializeArray();
-    data.push({
-      name: 'idBerkasStatus',
-      value: idBerkasStatus
+  // SOCKET -----------------
+  socket.on('getMessage', function (data) {
+    getNotif();
+  }); // ------------------------
+
+  getNotif();
+
+  function getNotif() {
+    $.ajax({
+      type: 'get',
+      url: window.location.origin + '/notif/getNotif'
+    }).then(function (res) {
+      $('#notifGroup').html('');
+      $('#notifCountBell').html('');
+      $('#notifCountHeader').html('0 New');
+      $('#readAllNotifGroup').html('');
+      var notifData = res.data.notif;
+      var content = "";
+      notifData.map(function (item) {
+        content += "\n                  <a class=\"d-flex justify-content-between notifItem\" href=\"javascript:void(0)\" data-id=\"".concat(item.id_notif_berkas_encrypt, "\">\n                      <div class=\"media d-flex align-items-start\">\n                          <div class=\"media-left\">\n                              <i class=\"font-medium-5 ").concat(item.berkas_status.fa_icon + ' ' + item.berkas_status.color, "\"></i>\n                          </div>\n                          <div class=\"media-body\">\n                              <h6 class=\"media-heading ").concat(item.berkas_status.color, "\">").concat(item.kode_berkas, "</h6>\n                              <small class=\"notification-text\">").concat(item.berkas_status.berkas_status + ' oleh ' + item.user_created.nama + ' pada ' + item.created_at_formatted, "</small>\n                          </div>\n                          <small>\n                              <time class=\"media-meta\" datetime=\"2015-06-11T18:29:20+08:00\">\n                              </time>\n                          </small>\n                      </div>\n                  </a>\n              ");
+      });
+      $('#notifGroup').html(content);
+      $('#notifCountBell').html(notifData.length > 0 ? notifData.length : '');
+      $('#notifCountHeader').html(notifData.length + ' New');
+
+      if (notifData.length > 0) {
+        $('#readAllNotifGroup').html("\n                  <a class=\"dropdown-item p-1 text-center\" href=\"javascript:void(0)\" id=\"readAllNotif\">Read all notifications</a>\n              ");
+      }
+    }).fail({});
+  }
+
+  $(document).on('click', '.notifItem', function () {
+    var notifId = $(this).data('id');
+    $.ajax({
+      type: "get",
+      url: window.location.origin + "/notif/readNotif/" + notifId
+    }).done(function (res) {
+      getNotif();
+      location.href = window.location.origin + res.data.route;
+    }).fail(function (res) {
+      swal('error', 'Server Error', 'Gagal menuju halaman');
     });
+  });
+  $(document).on('click', '#readAllNotif', function () {
     Swal.fire({
       title: 'Apakah Anda yakin?',
-      text: text,
+      text: 'Semua notifikasi akan terhapus',
       type: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Submit',
@@ -116,20 +150,13 @@ $(function () {
     }).then(function (result) {
       if (result.value) {
         $.ajax({
-          type: "post",
-          url: window.location.origin + "/berkasPerkara/storeReview",
-          data: data
+          type: "get",
+          url: window.location.origin + "/notif/readAllNotif"
         }).done(function (res) {
-          enableFormButton(btnContent);
-          swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara'); // socket
-
-          sendMessage(null);
+          getNotif();
         }).fail(function (res) {
-          enableFormButton(btnContent);
-          swal('error', 'Server Error', 'Data gagal disimpan');
+          swal('error', 'Server Error', 'Notifikasi gagal dihapus');
         });
-      } else {
-        enableFormButton(btnContent);
       }
     });
   });
@@ -137,14 +164,14 @@ $(function () {
 
 /***/ }),
 
-/***/ 12:
-/*!**********************************************************!*\
-  !*** multi ./resources/js/pages/berkasPerkara/review.js ***!
-  \**********************************************************/
+/***/ 2:
+/*!********************************************!*\
+  !*** multi ./resources/js/layout/notif.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\js\pages\berkasPerkara\review.js */"./resources/js/pages/berkasPerkara/review.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\js\layout\notif.js */"./resources/js/layout/notif.js");
 
 
 /***/ })

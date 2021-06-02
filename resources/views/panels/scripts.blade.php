@@ -24,6 +24,7 @@
 <script src="{{ asset('vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
 <script src="{{ asset('vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+
 <!-- END Vendor JS-->
 
 
@@ -39,6 +40,7 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
+<script src="{{ asset('js/layout/notif.js') }}"></script>
 <script src="{{ asset('js/globalCustom.js') }}"></script>
 @yield('page-script')
 <!-- END: Page JS-->
