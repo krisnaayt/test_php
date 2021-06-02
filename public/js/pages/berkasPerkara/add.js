@@ -201,7 +201,9 @@ $(function () {
         data: data
       }).done(function (res) {
         enableFormButton(btnContent);
-        swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara');
+        swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara'); // socket
+
+        sendMessage(null);
       }).fail(function (res) {
         enableFormButton(btnContent);
         swal('error', 'Server Error', 'Data gagal disimpan');

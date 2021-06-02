@@ -1,5 +1,10 @@
 $(function(){
+    // SOCKET -----------------
+    socket.on('getMessage', data => {
+        getNotif()
+    })
 
+    // ------------------------
     getNotif()
     function getNotif(){
       $.ajax({

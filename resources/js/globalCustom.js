@@ -389,4 +389,8 @@ $.ajaxSetup({
       enableButton('#'+item.id, item.text)
     })  
   }
-  
+
+  function sendNotif(){
+      console.log('test send notif')
+  }
+

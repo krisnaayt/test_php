@@ -94,6 +94,11 @@
 /***/ (function(module, exports) {
 
 $(function () {
+  // SOCKET -----------------
+  socket.on('getMessage', function (data) {
+    getNotif();
+  }); // ------------------------
+
   getNotif();
 
   function getNotif() {

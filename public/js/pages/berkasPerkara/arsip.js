@@ -96,10 +96,7 @@
 $(function () {
   $("#setArsipForm").validate({
     ignore: ":hidden",
-    rules: {// tglPenyerahan: {
-      //     required: true
-      // }
-    },
+    rules: {},
     errorPlacement: function errorPlacement(error, element) {
       error.appendTo(element.closest(".controls"));
     },
@@ -107,17 +104,33 @@ $(function () {
       var btnContent = getFormButton('.formBtn');
       disableFormButton(btnContent);
       var data = $(form).serialize();
-      $.ajax({
-        type: "post",
-        url: window.location.origin + "/berkasPerkara/storeSetArsip",
-        data: data
-      }).done(function (res) {
-        enableFormButton(btnContent); // swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
+      Swal.fire({
+        title: 'Apakah Anda yakin?',
+        text: 'Berkas akan diarsipkan',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Submit',
+        confirmButtonClass: 'btn btn-primary',
+        cancelButtonClass: 'btn btn-warning ml-1',
+        buttonsStyling: false
+      }).then(function (result) {
+        if (result.value) {
+          $.ajax({
+            type: "post",
+            url: window.location.origin + "/berkasPerkara/storeSetArsip",
+            data: data
+          }).done(function (res) {
+            enableFormButton(btnContent);
+            swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara'); // socket
 
-        console.log(res);
-      }).fail(function (res) {
-        enableFormButton(btnContent);
-        swal('error', 'Server Error', 'Data gagal disimpan');
+            sendMessage(null);
+          }).fail(function (res) {
+            enableFormButton(btnContent);
+            swal('error', 'Server Error', 'Data gagal disimpan');
+          });
+        } else {
+          enableFormButton(btnContent);
+        }
       });
     }
   });

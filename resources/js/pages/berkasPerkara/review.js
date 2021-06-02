@@ -27,6 +27,9 @@ $(function() {
                 .done(function(res) {
                     enableFormButton(btnContent)
                     swal('success', 'Success', 'Data berhasil disimpan', '/berkasPerkara')
+
+                    // socket
+                    sendMessage(null);
                 })
                 .fail(function(res) {
                     enableFormButton(btnContent)
