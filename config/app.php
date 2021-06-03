@@ -123,6 +123,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    // SOCKET 
+    'socket_host' => env('SOCKET_HOST', 'http://localhost'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
