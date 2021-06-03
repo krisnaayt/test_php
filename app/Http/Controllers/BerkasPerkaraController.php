@@ -75,7 +75,7 @@ class BerkasPerkaraController extends Controller
         DB::beginTransaction();
         try{
         
-            $lastBerkas = Berkas_perkara::where(DB::raw("date_format(created_at, '%Y-%m')"), date('Y-m'))
+            $lastBerkas = Berkas_perkara::where(DB::raw("date_format(created_at, '%Y')"), date('Y'))
             ->orderBy('id_berkas', 'desc')->first();
 
             $orderNo = $lastBerkas ? ((int) substr($lastBerkas->kode_berkas, 6) + 1) : 1;
