@@ -13,7 +13,7 @@
     @include('panels/styles')
     
     {{-- Socket IO --}}
-    <script src="https://cdn.socket.io/4.1.1/socket.io.min.js" integrity="sha384-cdrFIqe3RasCMNE0jeFG9xJHog/tgOVC1E9Lzve8LQN1g5WUHo0Kvk1mawWjxX7a" crossorigin="anonymous"></script>
+    <script src="{{ asset('vendors/js/socket/socket.io.min.js') }}"></script>
 
     <script>
         var socketHost = '{{ config('app.socket_host') }}';

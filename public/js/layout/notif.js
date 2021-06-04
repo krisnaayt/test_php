@@ -95,9 +95,12 @@
 
 $(function () {
   // SOCKET -----------------
-  socket.on('getMessage', function (data) {
-    getNotif();
-  }); // ------------------------
+  if (typeof socket !== 'undefined') {
+    socket.on('getMessage', function (data) {
+      getNotif();
+    });
+  } // ------------------------
+
 
   getNotif();
 
