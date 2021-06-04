@@ -1,8 +1,10 @@
 $(function(){
     // SOCKET -----------------
-    socket.on('getMessage', data => {
-        getNotif()
-    })
+    if(typeof socket !== 'undefined'){
+        socket.on('getMessage', data => {
+            getNotif()
+        })
+    }
 
     // ------------------------
     getNotif()
