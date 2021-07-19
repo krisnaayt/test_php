@@ -150,7 +150,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\js\pages\berkasPerkara\bht.js */"./resources/js/pages/berkasPerkara/bht.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\js\pages\berkasPerkara\bht.js */"./resources/js/pages/berkasPerkara/bht.js");
 
 
 /***/ })

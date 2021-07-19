@@ -49990,11 +49990,11 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\sass\globalCustom.scss */"./resources/sass/globalCustom.scss");
-__webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\sass\pages\berkasPerkara.scss */"./resources/sass/pages/berkasPerkara.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\sass\pages\suratPanjar\preview.scss */"./resources/sass/pages/suratPanjar/preview.scss");
+__webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\sass\globalCustom.scss */"./resources/sass/globalCustom.scss");
+__webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\sass\pages\berkasPerkara.scss */"./resources/sass/pages/berkasPerkara.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\sass\pages\suratPanjar\preview.scss */"./resources/sass/pages/suratPanjar/preview.scss");
 
 
 /***/ })

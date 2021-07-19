@@ -111,7 +111,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\js\pages\berkasPerkara\detail.js */"./resources/js/pages/berkasPerkara/detail.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\js\pages\berkasPerkara\detail.js */"./resources/js/pages/berkasPerkara/detail.js");
 
 
 /***/ })

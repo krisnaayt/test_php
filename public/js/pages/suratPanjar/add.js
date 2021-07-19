@@ -181,7 +181,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\pa_batulicin\resources\js\pages\suratPanjar\add.js */"./resources/js/pages/suratPanjar/add.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\dev-pa-apps\resources\js\pages\suratPanjar\add.js */"./resources/js/pages/suratPanjar/add.js");
 
 
 /***/ })
