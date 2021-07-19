@@ -126,6 +126,9 @@ return [
     // SOCKET 
     'socket_host' => env('SOCKET_HOST', 'http://localhost'),
 
+    // SMS_NOTIF_API_KEY
+    'sms_notif_api_key' => env('SMS_NOTIF_API_KEY', 'key'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

@@ -35,6 +35,7 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::get('/delete/{id}', 'SuratPanjarController@delete');
             Route::get('/preview/{preview}', 'SuratPanjarController@preview');           
         });
+        
         Route::prefix('suratReport')->group(function(){
             Route::get('/', 'SuratReportController@index');
             Route::get('/export', 'SuratReportController@export');
@@ -70,5 +71,16 @@ Route::group(['middleware' => ['authenticate']], function(){
             Route::get('/getNotif', 'NotifController@getNotif');
         });
 
+        Route::prefix('smsNotifAkta')->group(function(){
+            Route::get('/', 'SmsNotifAktaController@index');
+            Route::get('/get', 'SmsNotifAktaController@get');
+            Route::post('/findPerkara', 'SmsNotifAktaController@findPerkara');
+            Route::get('/add', 'SmsNotifAktaController@add');
+            Route::post('/store', 'SmsNotifAktaController@store');
+            Route::get('/detail/{id}', 'SmsNotifAktaController@detail');
+            Route::get('/edit/{id}', 'SmsNotifAktaController@edit');
+            Route::post('/update', 'SmsNotifAktaController@update');
+            Route::get('/syncAktaCeraiSipp', 'SmsNotifAktaController@syncAktaCeraiSipp');         
+        });
     });
 });

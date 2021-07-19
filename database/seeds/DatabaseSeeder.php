@@ -15,10 +15,13 @@ class DatabaseSeeder extends Seeder
         $this->call(SeederJenisPerkara::class);
         $this->call(SeederBerkasStatus::class);
         $this->call(SeederGrupJenisPerkara::class);
+        $this->call(SeederGetAkta::class);
+        $this->call(SeederSendAkta::class);
         
         $this->call(SpGetListSuratPanjar::class);
         $this->call(SpGetListBerkasPerkara::class);
         $this->call(SpGetSuratReport::class);
         $this->call(SpGetPerkaraReport::class);
+        $this->call(SpGetListNotifAkta::class);
     }
 }

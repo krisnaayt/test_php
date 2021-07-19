@@ -19,9 +19,11 @@
                 <li class="{{ Request::segment(1) == 'suratReport' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/suratReport') }}" ><i class="feather icon-download"></i><span >Report</span></a></li>
                 <li class="{{ Request::segment(1) == 'berkasPerkara' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/berkasPerkara') }}" ><i class="feather icon-briefcase"></i><span >Berkas Perkara</span></a></li>
                 <li class="{{ Request::segment(1) == 'perkaraReport' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/perkaraReport') }}" ><i class="feather icon-download"></i><span >Report Perkara</span></a></li>
+                <li class="{{ Request::segment(1) == 'smsNotifAkta' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/smsNotifAkta') }}" ><i class="feather icon-send"></i><span >Sms Akta Cerai</span></a></li>
                 @elseif ($userInfo->user_group == 'admin_surat')
                 <li class="{{ Request::segment(1) == 'suratPanjar' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/suratPanjar') }}" ><i class="feather icon-file-text"></i><span >Surat</span></a></li>
                 <li class="{{ Request::segment(1) == 'suratReport' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/suratReport') }}" ><i class="feather icon-download"></i><span >Report</span></a></li>
+                <li class="{{ Request::segment(1) == 'smsNotifAkta' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/smsNotifAkta') }}" ><i class="feather icon-send"></i><span >Sms Akta Cerai</span></a></li>
                 @elseif($userInfo->user_group == 'admin_emus')
                 <li class="{{ Request::segment(1) == 'berkasPerkara' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/berkasPerkara') }}" ><i class="feather icon-briefcase"></i><span >Berkas Perkara</span></a></li>
                 <li class="{{ Request::segment(1) == 'perkaraReport' ? 'active' : '' }}" ><a class="dropdown-item" href="{{ URL::to('/perkaraReport') }}" ><i class="feather icon-download"></i><span >Report Perkara</span></a></li>
