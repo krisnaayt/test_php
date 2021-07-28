@@ -232,7 +232,7 @@ class SmsNotifAktaController extends Controller
         }catch(\Exception $e){
             DB::rollback();
 
-            return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
+            // return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
         }
     }
 
