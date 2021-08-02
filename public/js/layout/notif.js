@@ -105,27 +105,27 @@ $(function () {
   getNotif();
 
   function getNotif() {
-    $.ajax({
-      type: 'get',
-      url: window.location.origin + '/notif/getNotif'
-    }).then(function (res) {
-      $('#notifGroup').html('');
-      $('#notifCountBell').html('');
-      $('#notifCountHeader').html('0 New');
-      $('#readAllNotifGroup').html('');
-      var notifData = res.data.notif;
-      var content = "";
-      notifData.map(function (item) {
-        content += "\n                  <a class=\"d-flex justify-content-between notifItem\" href=\"javascript:void(0)\" data-id=\"".concat(item.id_notif_berkas_encrypt, "\">\n                      <div class=\"media d-flex align-items-start\">\n                          <div class=\"media-left\">\n                              <i class=\"font-medium-5 ").concat(item.berkas_status.fa_icon + ' ' + item.berkas_status.color, "\"></i>\n                          </div>\n                          <div class=\"media-body\">\n                              <h6 class=\"media-heading ").concat(item.berkas_status.color, "\">").concat(item.kode_berkas, "</h6>\n                              <small class=\"notification-text\">").concat(item.berkas_status.berkas_status + ' oleh ' + item.user_created.nama + ' pada ' + item.created_at_formatted, "</small>\n                          </div>\n                          <small>\n                              <time class=\"media-meta\" datetime=\"2015-06-11T18:29:20+08:00\">\n                              </time>\n                          </small>\n                      </div>\n                  </a>\n              ");
-      });
-      $('#notifGroup').html(content);
-      $('#notifCountBell').html(notifData.length > 0 ? notifData.length : '');
-      $('#notifCountHeader').html(notifData.length + ' New');
+    // $.ajax({
+    //   type: 'get',
+    //   url: window.location.origin + '/notif/getNotif'
+    // }).then(function (res) {
+    //   $('#notifGroup').html('');
+    //   $('#notifCountBell').html('');
+    //   $('#notifCountHeader').html('0 New');
+    //   $('#readAllNotifGroup').html('');
+    //   var notifData = res.data.notif;
+    //   var content = "";
+    //   notifData.map(function (item) {
+    //     content += "\n                  <a class=\"d-flex justify-content-between notifItem\" href=\"javascript:void(0)\" data-id=\"".concat(item.id_notif_berkas_encrypt, "\">\n                      <div class=\"media d-flex align-items-start\">\n                          <div class=\"media-left\">\n                              <i class=\"font-medium-5 ").concat(item.berkas_status.fa_icon + ' ' + item.berkas_status.color, "\"></i>\n                          </div>\n                          <div class=\"media-body\">\n                              <h6 class=\"media-heading ").concat(item.berkas_status.color, "\">").concat(item.kode_berkas, "</h6>\n                              <small class=\"notification-text\">").concat(item.berkas_status.berkas_status + ' oleh ' + item.user_created.nama + ' pada ' + item.created_at_formatted, "</small>\n                          </div>\n                          <small>\n                              <time class=\"media-meta\" datetime=\"2015-06-11T18:29:20+08:00\">\n                              </time>\n                          </small>\n                      </div>\n                  </a>\n              ");
+    //   });
+    //   $('#notifGroup').html(content);
+    //   $('#notifCountBell').html(notifData.length > 0 ? notifData.length : '');
+    //   $('#notifCountHeader').html(notifData.length + ' New');
 
-      if (notifData.length > 0) {
-        $('#readAllNotifGroup').html("\n                  <a class=\"dropdown-item p-1 text-center\" href=\"javascript:void(0)\" id=\"readAllNotif\">Read all notifications</a>\n              ");
-      }
-    }).fail({});
+    //   if (notifData.length > 0) {
+    //     $('#readAllNotifGroup').html("\n                  <a class=\"dropdown-item p-1 text-center\" href=\"javascript:void(0)\" id=\"readAllNotif\">Read all notifications</a>\n              ");
+    //   }
+    // }).fail({});
   }
 
   $(document).on('click', '.notifItem', function () {

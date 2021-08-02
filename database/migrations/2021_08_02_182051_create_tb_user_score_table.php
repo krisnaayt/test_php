@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnGroupJenisPerkaraOnTbBerkasPerkaraTable extends Migration
+class CreateTbUserScoreTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,16 @@ class AddColumnGroupJenisPerkaraOnTbBerkasPerkaraTable extends Migration
     public function up()
     {
         DB::statement("
-            alter table tb_berkas_perkara
-            add column grup_jenis_perkara varchar(50) not null
+            create table tb_user_score(
+                id int,
+                name varchar(256),
+                score int,
+                emotion varchar(256),
+                created date,
+
+                constraint pk_tb_user_score_id primary key (id)
+                
+            )
         ");
     }
 
@@ -26,9 +34,6 @@ class AddColumnGroupJenisPerkaraOnTbBerkasPerkaraTable extends Migration
      */
     public function down()
     {
-        DB::statement("
-            alter table tb_berkas_perkara
-            drop column grup_jenis_perkara
-        ");
+        Schema::dropIfExists('user_score');
     }
 }

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') - PA Batulicin</title>
+    <title>@yield('title') - TEST PHP</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/favicon.ico') }}">
 
     @include('panels/styles')
@@ -16,9 +16,9 @@
     <script src="{{ asset('vendors/js/socket/socket.io.min.js') }}"></script>
 
     <script>
-        var socketHost = '{{ config('app.socket_host') }}';
+        // var socketHost = '{{ config('app.socket_host') }}';
 
-        const socket = io(socketHost);
+        // const socket = io(socketHost);
         // const socket = io('http://localhost:8090', {transports: ['websocket', 'polling', 'flashsocket']});
         
     </script>

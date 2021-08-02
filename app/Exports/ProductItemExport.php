@@ -2,19 +2,17 @@
 
 namespace App\Exports;
 
-use App\Surat_panjar;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Illuminate\Support\Facades\DB;
 
-class SuratReportExport implements FromArray, WithHeadings, ShouldAutoSize, WithColumnFormatting
+class ProductItemExport implements FromArray, WithHeadings, ShouldAutoSize, WithColumnFormatting
 {
-    public function __construct($startDate, $endDate)
+    public function __construct($productId)
     {
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
+        $this->productId = $productId;
     }
 
     public function columnFormats(): array
@@ -27,24 +25,20 @@ class SuratReportExport implements FromArray, WithHeadings, ShouldAutoSize, With
             'E' => '@',
             'F' => '@',
             'G' => '@',
-            'H' => '@',
-            'I' => '@',
-            'J' => '@',
-            'K' => '@',
-            'L' => '@'
+            'H' => '@'
         ];
     }
 
     public function headings(): array
     {
         return [
-            'No', 'No. Surat', 'No. Perkara', 'Nama', 'Alamat', 'No. Telp.', 'Sebagai', 'No. Rek.', 'Bank', 'Cabang', 'Created At', 'Updated At'
+            'No', 'Product', 'Category', 'Price', 'Stock', 'Image URL', 'Created At', 'Updated At'
         ];
     }
 
     public function array(): array{
 
-        $data = DB::select("call get_surat_report(".$this->startDate.", ".$this->endDate.")");
+        $data = DB::select("call export_product_item(".$this->productId.")");
 
         return $data;
     }

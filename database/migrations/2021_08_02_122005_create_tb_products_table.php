@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnSetBhtColumnOnTbBerkasPerkaraTable extends Migration
+class CreateTbProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,12 @@ class AddColumnSetBhtColumnOnTbBerkasPerkaraTable extends Migration
     public function up()
     {
         DB::statement("
-            alter table tb_berkas_perkara 
-            add column set_bht_by int null,
-            add column set_bht_at datetime null
+            create table tb_products(
+                product_id int,
+                product_name varchar(256) not null,
+
+                constraint pk_tb_products_product_id primary key (product_id)
+            )
         ");
     }
 
@@ -27,10 +30,6 @@ class AddColumnSetBhtColumnOnTbBerkasPerkaraTable extends Migration
      */
     public function down()
     {
-        DB::statement("
-            alter table tb_berkas_perkara
-            drop column set_bht_by,
-            drop column set_bht_at
-        ");
+        Schema::dropIfExists('products');
     }
 }

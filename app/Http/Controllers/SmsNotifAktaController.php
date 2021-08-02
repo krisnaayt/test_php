@@ -80,7 +80,7 @@ class SmsNotifAktaController extends Controller
             if($data->status == true){
                 return response()->json(['status' => true, 'message' => $data->message, 'data' => ['perkara' => $data->perkara]], 200);
             }else{
-                return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
+                return response()->json(['status' => false, 'message' => '', 'data' => []], 500);
             }
         }catch(\Exception $e){
             return response()->json(['status' => false, 'message' => $e, 'data' => []], 500);
