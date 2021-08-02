@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-9">
-                                    <a title="Add" class="btn btn-success mr-1 mb-1" role="button" href="{{ URL::to('productItem/add') }}"><i class="fa fa-plus"></i> Add Product</a>  
+                                    <a target="_blank" title="Add" class="btn btn-success mr-1 mb-1" role="button" href="{{ URL::to('productItem/add') }}"><i class="fa fa-plus"></i> Add Product</a>  
                                     <button type="button" class="btn btn-info mr-1 mb-1 formBtn" id="addItemFromApi"><i class="fa fa-plus"></i> Add Product From Api</button>
                                     <button type="button" class="btn btn-primary mr-1 mb-1 formBtn" id="exportButton"> Export To Excel</button>
                                 </div>

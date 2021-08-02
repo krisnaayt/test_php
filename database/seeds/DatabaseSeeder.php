@@ -11,17 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(SeederUser::class);
-        $this->call(SeederJenisPerkara::class);
-        $this->call(SeederBerkasStatus::class);
-        $this->call(SeederGrupJenisPerkara::class);
-        $this->call(SeederGetAkta::class);
-        $this->call(SeederSendAkta::class);
+        $this->call(SeederUserScore::class);
         
-        $this->call(SpGetListSuratPanjar::class);
-        $this->call(SpGetListBerkasPerkara::class);
-        $this->call(SpGetSuratReport::class);
-        $this->call(SpGetPerkaraReport::class);
-        $this->call(SpGetListNotifAkta::class);
+        $this->call(SpExportProductItem::class);
+        $this->call(SpGetListProductItem::class);
+        $this->call(SpGetUserScoreAvg::class);
+        $this->call(SpGetUserScoreAvgModus::class);
+        $this->call(SpGetUserScoreModus::class);
     }
 }

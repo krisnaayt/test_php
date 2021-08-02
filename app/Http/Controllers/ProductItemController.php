@@ -114,7 +114,7 @@ class ProductItemController extends Controller
         $item->item_id = date('mdHis');
         $item->product_id = $request->productId;
         $item->item_title = $request->itemTitle;
-        $item->item_price = $request->itemStock;
+        $item->item_price = $request->itemPrice;
         $item->item_image = $request->itemImage;
         $item->item_stock = $request->itemStock;
         $item->created_at = now();
@@ -139,7 +139,7 @@ class ProductItemController extends Controller
         $item = ProductItem::find(decrypt($request->itemId));
         $item->product_id = $request->productId;
         $item->item_title = $request->itemTitle;
-        $item->item_price = $request->itemStock;
+        $item->item_price = $request->itemPrice;
         $item->item_image = $request->itemImage;
         $item->item_stock = $request->itemStock;
         $item->updated_at = now();
